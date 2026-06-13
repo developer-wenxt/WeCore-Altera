@@ -1,0 +1,40 @@
+const { sequelize, QueryTypes } = require('../models');
+
+exports.getList = async (classCode) => {
+  const query = `SELECT DISTINCT CLASS_CODE, CLASS_DESC, M.MENU_PARAMETER_14 POL_PROD_CODE, PROD_DESC PRODIUCT, M.MENU_ACTION POL_INST_CODE,  
+
+       DECODE(M.MENU_PARAMETER_13,'1','1','2','3','3','4')  POL_BUS_TYPE, MENU_SCR_NAME BUS_TYPE_DESC,
+
+        M.MENU_PARAMETER_12 POL_DS_CODE,
+
+        M.MENU_PARAMETER_13
+
+FROM MENU_MENUS M, IM_INSTANCE , PGIM_PRODUCT , PGIM_CLASS
+
+WHERE M.MENU_ACTION = INST_CODE
+
+AND   INST_PROG_CODE = 'PGIT6_01' 
+
+AND   M.MENU_PARAMETER_11 = '2'
+
+AND   PROD_CODE = M.MENU_PARAMETER_14
+
+AND   M.MENU_PARAMETER_12 NOT LIKE 'T%'
+
+AND   M.MENU_PARAMETER_15 = '01'
+
+AND PROD_CLASS_CODE = CLASS_CODE 
+
+AND CLASS_CODE= :classCode
+
+AND   M.MENU_ACTION <> 'PGIT6_01-056'
+
+ORDER BY M.MENU_PARAMETER_14, M.MENU_PARAMETER_13
+ `;
+  const records = await sequelize.query(query, {
+    replacements: { classCode },
+    type: QueryTypes.SELECT,
+  });
+
+  return records;
+};

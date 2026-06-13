@@ -1,0 +1,6 @@
+@echo off
+echo Setting temporary PATH for Node.js...
+SET PATH=%PATH%;C:\Program Files\nodejs
+echo Starting the application...
+npm start
+pause

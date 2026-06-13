@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const pgitPolApplCurrController = require('../controllers/pgitPolApplCurrController');
+
+router.get('/', pgitPolApplCurrController.getAll);
+router.post('/', pgitPolApplCurrController.save);
+router.put('/:id', pgitPolApplCurrController.update);
+router.delete('/:id', pgitPolApplCurrController.deleteItem);
+router.get('/pacPolId', pgitPolApplCurrController.getByPolSysId);
+
+module.exports = router;
