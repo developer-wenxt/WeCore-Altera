@@ -1,6 +1,153 @@
 module.exports = (sequelize, DataTypes) => {
   const PGITRIPROPTTYALLOC = sequelize.define('PGITRIPROPTTYALLOC', {
-       RPTA_SYS_ID: { 
+       RPTA_TTY_SPL_RETN_PML_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_TTY_SPL_RETN_PML_LC_3' 
+    }
+    ,
+   RPTA_TTY_SPL_RETN_PREM_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_TTY_SPL_RETN_PREM_FC' 
+    }
+    ,
+   RPTA_TTY_SPL_RETN_PREM_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_TTY_SPL_RETN_PREM_LC_1' 
+    }
+    ,
+   RPTA_TTY_SPL_RETN_PREM_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_TTY_SPL_RETN_PREM_LC_2' 
+    }
+    ,
+   RPTA_TTY_SPL_RETN_PREM_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_TTY_SPL_RETN_PREM_LC_3' 
+    }
+    ,
+   RPTA_OVR_SPL_RETN_PREM_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_OVR_SPL_RETN_PREM_FC' 
+    }
+    ,
+   RPTA_OVR_SPL_RETN_PREM_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_OVR_SPL_RETN_PREM_LC_1' 
+    }
+    ,
+   RPTA_OVR_SPL_RETN_PREM_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_OVR_SPL_RETN_PREM_LC_2' 
+    }
+    ,
+   RPTA_OVR_SPL_RETN_PREM_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTA_OVR_SPL_RETN_PREM_LC_3' 
+    }
+    ,
+   RPTA_FLEX_01: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'RPTA_FLEX_01' 
+    }
+    ,
+   RPTA_FLEX_02: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'RPTA_FLEX_02' 
+    }
+    ,
+   RPTA_FLEX_03: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'RPTA_FLEX_03' 
+    }
+    ,
+   RPTA_FLEX_04: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'RPTA_FLEX_04' 
+    }
+    ,
+   RPTA_FLEX_05: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'RPTA_FLEX_05' 
+    }
+    ,
+   RPTA_CR_UID: { 
+      type: DataTypes.STRING(12), 
+      allowNull: false, 
+      
+      field: 'RPTA_CR_UID' 
+    }
+    ,
+   RPTA_CR_DT: { 
+      type: DataTypes.DATE, 
+      allowNull: false, 
+      
+      field: 'RPTA_CR_DT' 
+    }
+    ,
+   RPTA_UPD_UID: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'RPTA_UPD_UID' 
+    }
+    ,
+   RPTA_UPD_DT: { 
+      type: DataTypes.DATE, 
+      allowNull: true, 
+      
+      field: 'RPTA_UPD_DT' 
+    }
+    ,
+   RPTA_TTY_SHARE_PERC: { 
+      type: DataTypes.DECIMAL(8, 5), 
+      allowNull: true, 
+      
+      field: 'RPTA_TTY_SHARE_PERC' 
+    }
+    ,
+   RPTA_RA_ALLOC_IDX: { 
+      type: DataTypes.INTEGER, 
+      allowNull: true, 
+      
+      field: 'RPTA_RA_ALLOC_IDX' 
+    }
+    ,
+   RPTA_CESSION_NO: { 
+      type: DataTypes.STRING(60), 
+      allowNull: true, 
+      
+      field: 'RPTA_CESSION_NO' 
+    }
+    ,
+   RPTA_SYS_ID: { 
       type: DataTypes.INTEGER, 
       allowNull: false, 
       
@@ -510,258 +657,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true, 
       
       field: 'RPTA_TTY_SPL_RETN_PML_LC_2' 
-    }
-    ,
-   RPTA_TTY_SPL_RETN_PML_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_TTY_SPL_RETN_PML_LC_3' 
-    }
-    ,
-   RPTA_TTY_SPL_RETN_PREM_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_TTY_SPL_RETN_PREM_FC' 
-    }
-    ,
-   RPTA_TTY_SPL_RETN_PREM_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_TTY_SPL_RETN_PREM_LC_1' 
-    }
-    ,
-   RPTA_TTY_SPL_RETN_PREM_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_TTY_SPL_RETN_PREM_LC_2' 
-    }
-    ,
-   RPTA_TTY_SPL_RETN_PREM_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_TTY_SPL_RETN_PREM_LC_3' 
-    }
-    ,
-   RPTA_OVR_SPL_RETN_PREM_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_OVR_SPL_RETN_PREM_FC' 
-    }
-    ,
-   RPTA_OVR_SPL_RETN_PREM_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_OVR_SPL_RETN_PREM_LC_1' 
-    }
-    ,
-   RPTA_OVR_SPL_RETN_PREM_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_OVR_SPL_RETN_PREM_LC_2' 
-    }
-    ,
-   RPTA_OVR_SPL_RETN_PREM_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_OVR_SPL_RETN_PREM_LC_3' 
-    }
-    ,
-   RPTA_FLEX_01: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'RPTA_FLEX_01' 
-    }
-    ,
-   RPTA_FLEX_02: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'RPTA_FLEX_02' 
-    }
-    ,
-   RPTA_FLEX_03: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'RPTA_FLEX_03' 
-    }
-    ,
-   RPTA_FLEX_04: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'RPTA_FLEX_04' 
-    }
-    ,
-   RPTA_FLEX_05: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'RPTA_FLEX_05' 
-    }
-    ,
-   RPTA_CR_UID: { 
-      type: DataTypes.STRING(12), 
-      allowNull: false, 
-      
-      field: 'RPTA_CR_UID' 
-    }
-    ,
-   RPTA_CR_DT: { 
-      type: DataTypes.DATE, 
-      allowNull: false, 
-      
-      field: 'RPTA_CR_DT' 
-    }
-    ,
-   RPTA_UPD_UID: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'RPTA_UPD_UID' 
-    }
-    ,
-   RPTA_UPD_DT: { 
-      type: DataTypes.DATE, 
-      allowNull: true, 
-      
-      field: 'RPTA_UPD_DT' 
-    }
-    ,
-   RPTA_TTY_SHARE_PERC: { 
-      type: DataTypes.DECIMAL(8, 5), 
-      allowNull: true, 
-      
-      field: 'RPTA_TTY_SHARE_PERC' 
-    }
-    ,
-   RPTA_RA_ALLOC_IDX: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'RPTA_RA_ALLOC_IDX' 
-    }
-    ,
-   RPTA_CESSION_NO: { 
-      type: DataTypes.STRING(60), 
-      allowNull: true, 
-      
-      field: 'RPTA_CESSION_NO' 
-    }
-    ,
-   RPTA_LINK_TTY_SHARE_PERC: { 
-      type: DataTypes.DECIMAL(8, 5), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_SHARE_PERC' 
-    }
-    ,
-   RPTA_LINK_TTY_SI_BALANCE_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_SI_BALANCE_FC' 
-    }
-    ,
-   RPTA_LINK_TTY_PML_BALANCE_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_PML_BALANCE_FC' 
-    }
-    ,
-   RPTA_LINK_ALLOC_YN: { 
-      type: DataTypes.STRING(1), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_ALLOC_YN' 
-    }
-    ,
-   RPTA_LINK_GROSS_RETN_SI_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_GROSS_RETN_SI_FC' 
-    }
-    ,
-   RPTA_LINK_GROSS_RETN_PML_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_GROSS_RETN_PML_FC' 
-    }
-    ,
-   RPTA_LINK_TTY_SI_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_SI_FC' 
-    }
-    ,
-   RPTA_LINK_TTY_SI_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_SI_LC_1' 
-    }
-    ,
-   RPTA_LINK_TTY_SI_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_SI_LC_2' 
-    }
-    ,
-   RPTA_LINK_TTY_SI_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_SI_LC_3' 
-    }
-    ,
-   RPTA_LINK_TTY_PML_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_PML_FC' 
-    }
-    ,
-   RPTA_LINK_TTY_PML_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_PML_LC_1' 
-    }
-    ,
-   RPTA_LINK_TTY_PML_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_PML_LC_2' 
-    }
-    ,
-   RPTA_LINK_TTY_PML_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_TTY_PML_LC_3' 
-    }
-    ,
-   RPTA_LINK_ALLOC_IDX: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'RPTA_LINK_ALLOC_IDX' 
     }
     
     }, {

@@ -1,4 +1,4 @@
-const { PgitFacCust,sequelize,QueryTypes } = require('../models');
+const { PgitFacCust, sequelize, QueryTypes } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PgitFacCust.findAll({ where: filters, limit, offset, ...(order && { order }) });
@@ -53,7 +53,7 @@ exports.getByPolSysId = async (FC_FPS_SYS_ID) => {
   });
 
   const groupedResult = items.reduce((acc, row) => {
-    const key = row.FC_SYS_ID; 
+    const key = row.FC_SYS_ID;
     (acc[key] ??= []).push(row);
     return acc;
   }, {});

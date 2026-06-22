@@ -7,7 +7,8 @@ exports.getAll = async (
     POL_APPR_STS,
     POL_SRC_TYPE,
     issueDateFrom,
-    issueDateTo
+    issueDateTo,
+    POL_CLASS_CODE
   },
   {
     limit = 10,
@@ -23,6 +24,11 @@ exports.getAll = async (
   if (POL_PROD_CODE) {
     conditions.push(`P.POL_PROD_CODE = :POL_PROD_CODE`);
     replacements.POL_PROD_CODE = POL_PROD_CODE;
+  }
+
+  if (POL_CLASS_CODE) {
+    conditions.push(`P.POL_CLASS_CODE = :POL_CLASS_CODE`);
+    replacements.POL_CLASS_CODE = POL_CLASS_CODE;
   }
 
   if (POL_APPR_STS) {

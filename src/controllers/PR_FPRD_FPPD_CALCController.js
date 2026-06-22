@@ -3,7 +3,7 @@ const { successResponse, errorResponse } = require('../utils/response');
 
 exports.calculate = async (req, res) => {
   try {
-    const source = Object.keys(req.body).length > 0 ? req.body : req.query;
+    const source = req.query;
     
     const fpsSysId = source.fpsSysId ?? source.P_FPS_SYS_ID ?? null;
     const fprdYn = source.fprdYn ?? source.P_FPRD_YN ?? 'Y';

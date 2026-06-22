@@ -12,6 +12,32 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
+exports.getById = async (req, res, next) => {
+  try {
+    const { RI_POL_SYS_ID, RI_END_NO_IDX, RI_END_SR_NO } = req.query;
+
+    if (
+      RI_POL_SYS_ID === undefined ||
+      RI_END_NO_IDX === undefined ||
+      RI_END_SR_NO === undefined
+    ) {
+      return res.status(400).json({
+        message: 'RI_POL_SYS_ID, RI_END_NO_IDX, and RI_END_SR_NO are required'
+      });
+    }
+
+    const result = await PGITRIINTERFACEService.getById({
+      RI_POL_SYS_ID: Number(RI_POL_SYS_ID),
+      RI_END_NO_IDX: Number(RI_END_NO_IDX),
+      RI_END_SR_NO: Number(RI_END_SR_NO)
+    });
+
+    return successResponse(res, 200, "Data Fetched", result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.create = async (req, res, next) => {
   try {
     const result = await PGITRIINTERFACEService.create(req.body);
@@ -35,48 +61,6 @@ exports.deleteItem = async (req, res, next) => {
     const result = await PGITRIINTERFACEService.deleteItem(req.params.id);
     return successResponse(res, 200, "Deleted", result);
   } catch (err) {
-    next(err);
-  }
-};
-
-exports.getById = async (req, res, next) => {
-  try {
-    const result = await PGITRIINTERFACEService.getById(req.params.id);
-    return successResponse(res, 200, "Fetched successfully", result);
-  } catch (err) {
-    next(err);
-  }
-};
-
-
-exports.getByPolSysId = async (req, res, next) => {
-  try {
-    const { RI_POL_SYS_ID, RI_END_NO_IDX, RI_END_SR_NO } = req.query;
-
-    if (!RI_POL_SYS_ID) {
-      return res.status(400).json({ message: "RI_POL_SYS_ID is required" });
-    }
-
-    const polSysIdNum = Number(RI_POL_SYS_ID);
-
-    if (isNaN(polSysIdNum)) {
-      return res.status(400).json({ message: "Invalid riPolSysId" });
-    }
-
-    const endNoIdxNum = RI_END_NO_IDX !== undefined ? Number(RI_END_NO_IDX) : undefined;
-    const endSrNoNum = RI_END_SR_NO !== undefined ? Number(RI_END_SR_NO) : undefined;
-
-    const result = await PGITRIINTERFACEService.getByPolSysId(polSysIdNum, endNoIdxNum, endSrNoNum);
-
-    return successResponse(
-      res,
-      200,
-      "Fetched successfully",
-      result
-    );
-
-  } catch (err) {
-    console.error("Error in getByPolSysId:", err);
     next(err);
   }
 };

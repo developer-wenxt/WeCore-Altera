@@ -3,10 +3,9 @@ const router = express.Router();
 const PGITRIPROPTTYALLOCController = require('../controllers/PGITRIPROPTTYALLOCController');
 
 router.get('/', PGITRIPROPTTYALLOCController.getAll);
+router.get('/sysId', PGITRIPROPTTYALLOCController.getById);
 router.post('/', PGITRIPROPTTYALLOCController.create);
 router.put('/:id', PGITRIPROPTTYALLOCController.update);
 router.delete('/:id', PGITRIPROPTTYALLOCController.deleteItem);
-router.get('/byId',PGITRIPROPTTYALLOCController.getById);
-router.get('/sysId', PGITRIPROPTTYALLOCController.getByPolSysId);
 
 module.exports = router;

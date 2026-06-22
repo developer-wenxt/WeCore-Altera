@@ -43,7 +43,7 @@ exports.deleteItem = async (req, res, next) => {
 
 exports.getByPolSysId = async (req, res, next) => {
   try {
-    const { foPolSysId } = req.query;
+    const { foPolSysId, foEndNoIdx, foEndSrNo } = req.query;
 
     if (!foPolSysId) {
       return res.status(400).json({
@@ -52,7 +52,11 @@ exports.getByPolSysId = async (req, res, next) => {
       });
     }
 
-    const result = await pgitFacOutService.getByPolSysId(Number(foPolSysId));
+    const result = await pgitFacOutService.getByPolSysId(
+      Number(foPolSysId),
+      foEndNoIdx !== undefined ? Number(foEndNoIdx) : undefined,
+      foEndSrNo !== undefined ? Number(foEndSrNo) : undefined
+    );
 
     return successResponse(res, 200, 'Fetched', result);
 

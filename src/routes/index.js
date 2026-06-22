@@ -44,6 +44,9 @@ const pgitPolScheduleRouter = require('./pgitPolSchedule');
 const pgitPolInwardRouter = require('./pgitPolInward');
 const pgitPolCoinPartCustRouter = require('./pgitPolCoinPartCust');
 const pgitPolCoinCommRouter = require('./pgitPolCoinComm');
+const PGITRIPROPTTYALLOCCUSTRouter = require('./PGITRIPROPTTYALLOCCUST');
+const PGITRIPROPTTYALLOCRCRouter = require('./PGITRIPROPTTYALLOCRC');
+const pgitFacPlaceRiskDtlRouter = require('./pgitFacPlaceRiskDtl');
 const router = express.Router();
 const lmCompanyRoutes=require('./lmCompanyRoutes');
 const class_of_busRoute = require('./class_of_busRoute');
@@ -115,8 +118,11 @@ const prFacRetroCalcRoute = require('./prFacRetroCalcRoute.js');
 const prCalcFacCustPremTaxRoute = require('./prCalcFacCustPremTaxRoute.js');
 const prCalcFacCommTaxRoute = require('./prCalcFacCommTaxRoute.js');
 const prCalcRetroCustPremTaxRoute = require('./prCalcRetroCustPremTaxRoute.js');
+const prDefaultFacPercRoute = require('./prDefaultFacPercRoute.js');
+const prClearFacPercRoute = require('./prClearFacPercRoute.js');
 const vatTaxFieldRoute = require('./vatTaxFieldRoute.js');
 const endBlkSetupRoute = require('./endBlkSetupRoute.js');
+const endBtnRoute = require('./endBtnRoute.js');
 const polAcntEntryRoute=require('./polAcntEntryRoute.js');
 const inwardField=require('./pgitPolInwardFieldRoute.js');
 const coinPartCustField=require('./pgitPolCoinPartCustFieldRoute.js');
@@ -124,9 +130,11 @@ const pgitPolCoinCommField=require('./pgitPolCoinCommFieldRoute.js');
 const PolInwardLov=require('./pgitPolInwardLovRoute.js');
 const CoinPartCustLov=require('./pgitPolCoinPartCustLovRoute.js');
 const pgitPolCoinCommLov=require('./pgitPolCoinCommLovRoute.js');
-
-
-
+const riTtyAllocCustField=require('./pgitRiPropTtyAllocCustFieldRoute.js');
+const pgitRiPropAllocRcFieldRoute=require('./pgitRiPropAllocRcFieldRoute.js');
+const riConCanBtn = require('./riConCanBtnRoute.js');
+const ttyApproveBtn = require('./ttyApproveBtnRoute.js');
+const pgitFacPlaceRiskDtlFieldRoute = require('./pgitFacPlaceRiskDtlFieldRoute.js');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -202,6 +210,7 @@ router.use('/polInstCharge', PGITPOLINSTCHARGERouter);
 router.use('/preDtls',PGIT_POL_PREM_DTLRoute);
 router.use('/sdrop',simpleDropdownService);
 router.use('/approveBtn',appBtn);
+
 router.use('/treatyTab1',riInterfaceField);
 router.use('/treatyTab2',riTtyDtlPgField);
 router.use('/treatyTab3',riTtyAllocField);
@@ -259,6 +268,20 @@ router.use('/CoinCommField',pgitPolCoinCommField);
 router.use('/PolInwardLov',PolInwardLov);
 router.use('/CoinPartCustLov',CoinPartCustLov);
 router.use('/CoinCommLov',pgitPolCoinCommLov);
+router.use('/ttyPartCustField',riTtyAllocCustField);
+router.use('/ttyRiskClassField',pgitRiPropAllocRcFieldRoute);
+router.use('/PGITRIPROPTTYALLOCCUST', PGITRIPROPTTYALLOCCUSTRouter);
+router.use('/PGITRIPROPTTYALLOCRC', PGITRIPROPTTYALLOCRCRouter);
+router.use('/riConCanBtn', riConCanBtn);
+router.use('/ttyApproveBtn', ttyApproveBtn);
+router.use('/pgitFacPlaceRiskDtl', pgitFacPlaceRiskDtlRouter);
+router.use('/pgitFacPlaceRiskDtlField', pgitFacPlaceRiskDtlFieldRoute);
+router.use('/prDefaultFacPerc', prDefaultFacPercRoute);
+router.use('/prClearFacPerc', prClearFacPercRoute);
+router.use('/endBtn', endBtnRoute);
 
 
+
+
+router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
 module.exports = router;

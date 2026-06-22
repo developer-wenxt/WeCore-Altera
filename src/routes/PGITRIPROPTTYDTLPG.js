@@ -3,11 +3,9 @@ const router = express.Router();
 const PGITRIPROPTTYDTLPGController = require('../controllers/PGITRIPROPTTYDTLPGController');
 
 router.get('/', PGITRIPROPTTYDTLPGController.getAll);
+router.get('/sysId', PGITRIPROPTTYDTLPGController.getById);
 router.post('/', PGITRIPROPTTYDTLPGController.create);
 router.put('/:id', PGITRIPROPTTYDTLPGController.update);
 router.delete('/:id', PGITRIPROPTTYDTLPGController.deleteItem);
-router.get('/byId',PGITRIPROPTTYDTLPGController.getById);
-router.get('/sysId', PGITRIPROPTTYDTLPGController.getByPolSysId);
-
 
 module.exports = router;

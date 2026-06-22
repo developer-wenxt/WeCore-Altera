@@ -1,223 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const PGITRIPROPTTYDTLPG = sequelize.define('PGITRIPROPTTYDTLPG', {
-       RPTDG_TOT_PML_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PML_FC' 
-    }
-    ,
-   RPTDG_TOT_PML_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PML_LC_1' 
-    }
-    ,
-   RPTDG_TOT_PML_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PML_LC_2' 
-    }
-    ,
-   RPTDG_TOT_PML_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PML_LC_3' 
-    }
-    ,
-   RPTDG_TOT_PREM_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PREM_FC' 
-    }
-    ,
-   RPTDG_TOT_PREM_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PREM_LC_1' 
-    }
-    ,
-   RPTDG_TOT_PREM_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PREM_LC_2' 
-    }
-    ,
-   RPTDG_TOT_PREM_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_TOT_PREM_LC_3' 
-    }
-    ,
-   RPTDG_OUR_SHARE_PERC: { 
-      type: DataTypes.DECIMAL(8, 5), 
-      allowNull: true, 
-      
-      field: 'RPTDG_OUR_SHARE_PERC' 
-    }
-    ,
-   RPTDG_END_PML_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PML_LC_3' 
-    }
-    ,
-   RPTDG_END_SI_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_SI_FC' 
-    }
-    ,
-   RPTDG_END_SI_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_SI_LC_1' 
-    }
-    ,
-   RPTDG_END_SI_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_SI_LC_2' 
-    }
-    ,
-   RPTDG_END_SI_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_SI_LC_3' 
-    }
-    ,
-   RPTDG_END_PML_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PML_FC' 
-    }
-    ,
-   RPTDG_END_PML_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PML_LC_1' 
-    }
-    ,
-   RPTDG_END_PML_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PML_LC_2' 
-    }
-    ,
-   RPTDG_END_PREM_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PREM_FC' 
-    }
-    ,
-   RPTDG_END_PREM_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PREM_LC_1' 
-    }
-    ,
-   RPTDG_END_PREM_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PREM_LC_2' 
-    }
-    ,
-   RPTDG_END_PREM_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_END_PREM_LC_3' 
-    }
-    ,
-   RPTDG_LINK_ALLOC_YN: { 
-      type: DataTypes.STRING(1), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_ALLOC_YN' 
-    }
-    ,
-   RPTDG_LINK_TOT_SI_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_SI_FC' 
-    }
-    ,
-   RPTDG_LINK_TOT_SI_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_SI_LC_1' 
-    }
-    ,
-   RPTDG_LINK_TOT_SI_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_SI_LC_2' 
-    }
-    ,
-   RPTDG_LINK_TOT_SI_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_SI_LC_3' 
-    }
-    ,
-   RPTDG_LINK_TOT_PML_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_PML_FC' 
-    }
-    ,
-   RPTDG_LINK_TOT_PML_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_PML_LC_1' 
-    }
-    ,
-   RPTDG_LINK_TOT_PML_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_PML_LC_2' 
-    }
-    ,
-   RPTDG_LINK_TOT_PML_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_TOT_PML_LC_3' 
-    }
-    ,
-   RPTDG_RA_ID: { 
-      type: DataTypes.STRING(60), 
-      allowNull: true, 
-      
-      field: 'RPTDG_RA_ID' 
-    }
-    ,
-   RPTDG_RA_ALLOC_IDX: { 
+       RPTDG_RA_ALLOC_IDX: { 
       type: DataTypes.INTEGER, 
       allowNull: true, 
       
@@ -260,24 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     }
     ,
    RPTDG_TOP_RPRD_SYS_ID: { 
-      type: DataTypes.INTEGER, 
+      type: DataTypes.STRING(60), 
       allowNull: true, 
       
       field: 'RPTDG_TOP_RPRD_SYS_ID' 
-    }
-    ,
-   RPTDG_LINK_RI_SYS_ID: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_RI_SYS_ID' 
-    }
-    ,
-   RPTDG_LINK_ALLOC_IDX: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'RPTDG_LINK_ALLOC_IDX' 
     }
     ,
    RPTDG_SYS_ID: { 
@@ -608,6 +377,223 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true, 
       
       field: 'RPTDG_TOT_SI_LC_3' 
+    }
+    ,
+   RPTDG_TOT_PML_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PML_FC' 
+    }
+    ,
+   RPTDG_TOT_PML_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PML_LC_1' 
+    }
+    ,
+   RPTDG_TOT_PML_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PML_LC_2' 
+    }
+    ,
+   RPTDG_TOT_PML_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PML_LC_3' 
+    }
+    ,
+   RPTDG_TOT_PREM_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PREM_FC' 
+    }
+    ,
+   RPTDG_TOT_PREM_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PREM_LC_1' 
+    }
+    ,
+   RPTDG_TOT_PREM_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PREM_LC_2' 
+    }
+    ,
+   RPTDG_TOT_PREM_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_TOT_PREM_LC_3' 
+    }
+    ,
+   RPTDG_OUR_SHARE_PERC: { 
+      type: DataTypes.DECIMAL(8, 5), 
+      allowNull: true, 
+      
+      field: 'RPTDG_OUR_SHARE_PERC' 
+    }
+    ,
+   RPTDG_END_PML_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PML_LC_3' 
+    }
+    ,
+   RPTDG_END_SI_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_SI_FC' 
+    }
+    ,
+   RPTDG_END_SI_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_SI_LC_1' 
+    }
+    ,
+   RPTDG_END_SI_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_SI_LC_2' 
+    }
+    ,
+   RPTDG_END_SI_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_SI_LC_3' 
+    }
+    ,
+   RPTDG_END_PML_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PML_FC' 
+    }
+    ,
+   RPTDG_END_PML_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PML_LC_1' 
+    }
+    ,
+   RPTDG_END_PML_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PML_LC_2' 
+    }
+    ,
+   RPTDG_END_PREM_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PREM_FC' 
+    }
+    ,
+   RPTDG_END_PREM_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PREM_LC_1' 
+    }
+    ,
+   RPTDG_END_PREM_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PREM_LC_2' 
+    }
+    ,
+   RPTDG_END_PREM_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_END_PREM_LC_3' 
+    }
+    ,
+   RPTDG_LINK_ALLOC_YN: { 
+      type: DataTypes.STRING(1), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_ALLOC_YN' 
+    }
+    ,
+   RPTDG_LINK_TOT_SI_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_SI_FC' 
+    }
+    ,
+   RPTDG_LINK_TOT_SI_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_SI_LC_1' 
+    }
+    ,
+   RPTDG_LINK_TOT_SI_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_SI_LC_2' 
+    }
+    ,
+   RPTDG_LINK_TOT_SI_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_SI_LC_3' 
+    }
+    ,
+   RPTDG_LINK_TOT_PML_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_PML_FC' 
+    }
+    ,
+   RPTDG_LINK_TOT_PML_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_PML_LC_1' 
+    }
+    ,
+   RPTDG_LINK_TOT_PML_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_PML_LC_2' 
+    }
+    ,
+   RPTDG_LINK_TOT_PML_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'RPTDG_LINK_TOT_PML_LC_3' 
+    }
+    ,
+   RPTDG_RA_ID: { 
+      type: DataTypes.STRING(60), 
+      allowNull: true, 
+      
+      field: 'RPTDG_RA_ID' 
     }
     
     }, {

@@ -1,4 +1,4 @@
-const { PGITPOLRISKADDLINFO , sequelize} = require('../models');
+const { PgitPolRiskAddlInfo: PGITPOLRISKADDLINFO , sequelize} = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PGITPOLRISKADDLINFO.findAll({ where: filters, limit, offset, ...(order && { order }) });
@@ -16,30 +16,30 @@ exports.create = async (data) => {
 
   try {
 
-    // ✅ Validate required fields (lowercase)
-    if (!data.prai_risk_id || !data.prai_psec_sys_id) {
-      throw new Error('prai_risk_id and prai_psec_sys_id are required');
+    // ✅ Validate required fields (uppercase)
+    if (!data.PRAI_RISK_ID || !data.PRAI_PSEC_SYS_ID) {
+      throw new Error('PRAI_RISK_ID and PRAI_PSEC_SYS_ID are required');
     }
 
     // 🔴 Duplicate validation (UNIQUE TOGETHER)
     const existing = await PGITPOLRISKADDLINFO.findOne({
       where: {
-        prai_risk_id: data.prai_risk_id,
-        prai_psec_sys_id: data.prai_psec_sys_id,
-        prai_pol_sys_id: data.prai_pol_sys_id
+        PRAI_RISK_ID: data.PRAI_RISK_ID,
+        PRAI_PSEC_SYS_ID: data.PRAI_PSEC_SYS_ID,
+        PRAI_POL_SYS_ID: data.PRAI_POL_SYS_ID
       },
       transaction
     });
 
     if (existing) {
       throw new Error(
-        `Record already exists for RISK_ID ${data.prai_risk_id} and PSEC_SYS_ID ${data.prai_psec_sys_id}`
+        `Record already exists for RISK_ID ${data.PRAI_RISK_ID} and PSEC_SYS_ID ${data.PRAI_PSEC_SYS_ID}`
       );
     }
 
     // 🔹 Generate Sequence ID
     const nextId = await getNextPolSysId();
-    data.prai_sys_id = nextId;
+    data.PRAI_SYS_ID = nextId;
 
     const createdRecord = await PGITPOLRISKADDLINFO.create(data, {
       transaction
@@ -48,7 +48,7 @@ exports.create = async (data) => {
     // 🔹 Update lvl1_sys_id same as sys_id
     await createdRecord.update(
       {
-        prai_lvl1_sys_id: createdRecord.prai_sys_id,
+        PRAI_LVL1_SYS_ID: createdRecord.PRAI_SYS_ID,
       },
       { transaction }
     );
@@ -57,16 +57,16 @@ exports.create = async (data) => {
 
     // 🔹 Response Format
     const responseData = {
-      prai_sys_id: createdRecord.prai_sys_id,
-      prai_pol_sys_id: createdRecord.prai_pol_sys_id,
-      prai_end_no_idx: createdRecord.prai_end_no_idx,
-      prai_psec_sys_id: createdRecord.prai_psec_sys_id,
-      prai_risk_lvl_no: createdRecord.prai_risk_lvl_no,
-      prai_risk_sr_no: createdRecord.prai_risk_sr_no,
-      prai_lvl1_sr_no: createdRecord.prai_lvl1_sr_no,
-      prai_lvl2_sr_no: createdRecord.prai_lvl2_sr_no,
-      prai_lvl1_sys_id: createdRecord.prai_lvl1_sys_id,
-      prai_risk_id: createdRecord.prai_risk_id,
+      PRAI_SYS_ID: createdRecord.PRAI_SYS_ID,
+      PRAI_POL_SYS_ID: createdRecord.PRAI_POL_SYS_ID,
+      PRAI_END_NO_IDX: createdRecord.PRAI_END_NO_IDX,
+      PRAI_PSEC_SYS_ID: createdRecord.PRAI_PSEC_SYS_ID,
+      PRAI_RISK_LVL_NO: createdRecord.PRAI_RISK_LVL_NO,
+      PRAI_RISK_SR_NO: createdRecord.PRAI_RISK_SR_NO,
+      PRAI_LVL1_SR_NO: createdRecord.PRAI_LVL1_SR_NO,
+      PRAI_LVL2_SR_NO: createdRecord.PRAI_LVL2_SR_NO,
+      PRAI_LVL1_SYS_ID: createdRecord.PRAI_LVL1_SYS_ID,
+      PRAI_RISK_ID: createdRecord.PRAI_RISK_ID,
       createdRecord
     };
 
@@ -110,7 +110,7 @@ exports.getByPolSysId = async (PRAI_POL_SYS_ID , PRAI_PSEC_SYS_ID) => {
   });
 
    const groupedResult = items.reduce((acc, row) => {
-    const key = row.prai_sys_id;
+    const key = row.PRAI_SYS_ID;
     (acc[key] ??= []).push(row);
     return acc;
   }, {});

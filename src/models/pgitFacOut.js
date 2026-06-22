@@ -246,32 +246,11 @@ module.exports = (sequelize, DataTypes) => {
       field: 'FO_FAC_XOL_ID' 
     }
     ,
-   FO_DFLT_SHARE_PERC: { 
-      type: DataTypes.DECIMAL(15, 12), 
-      allowNull: true, 
-      
-      field: 'FO_DFLT_SHARE_PERC' 
-    }
-    ,
-   FO_INST_YN: { 
-      type: DataTypes.STRING(1), 
-      allowNull: true, 
-      
-      field: 'FO_INST_YN' 
-    }
-    ,
-   FO_NO_OF_INST: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'FO_NO_OF_INST' 
-    }
-    ,
-   FO_INSTL_METHOD: { 
+   FO_BUS_TYPE: { 
       type: DataTypes.STRING(12), 
       allowNull: true, 
       
-      field: 'FO_INSTL_METHOD' 
+      field: 'FO_BUS_TYPE' 
     }
     
     }, {

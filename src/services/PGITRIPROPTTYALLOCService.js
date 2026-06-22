@@ -1,29 +1,29 @@
-const { PGITRIPROPTTYALLOC,sequelize } = require('../models');
-const { QueryTypes } = require('sequelize');
+const { PGITRIPROPTTYALLOC } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PGITRIPROPTTYALLOC.findAll({ where: filters, limit, offset, ...(order && { order }) });
 };
 
-async function getNextFoSysId() {
-  const [result] = await sequelize.query(
-    'SELECT PGI_RPTA_SYS_ID.NEXTVAL AS NEXTVAL FROM DUAL',
-    { type: QueryTypes.SELECT }
-  );
-  return result.NEXTVAL;
-}
+exports.getById = async (keys) => {
+  const whereClause = {
+    RPTA_POL_SYS_ID: keys.RPTA_POL_SYS_ID,
+    RPTA_END_NO_IDX: keys.RPTA_END_NO_IDX,
+    RPTA_END_SR_NO: keys.RPTA_END_SR_NO
+  };
+  
+  if (keys.RPTA_RPTDG_SYS_ID !== undefined) {
+    whereClause.RPTA_RPTDG_SYS_ID = keys.RPTA_RPTDG_SYS_ID;
+  }
 
-exports.create = async (data) => {
-  const nextId = await getNextFoSysId();
-  data.RI_SYS_ID = nextId;
-  return await PGITRIPROPTTYALLOC.create(data);
+  const items = await PGITRIPROPTTYALLOC.findAll({
+    where: whereClause
+  });
+  return items;
 };
 
-
-
-// exports.create = async (data) => {
-//   return await PGITRIPROPTTYALLOC.create(data);
-// };
+exports.create = async (data) => {
+  return await PGITRIPROPTTYALLOC.create(data);
+};
 
 exports.update = async (id, updatedData) => {
   const item = await PGITRIPROPTTYALLOC.findByPk(id);
@@ -45,47 +45,4 @@ exports.deleteItem = async (id) => {
   }
   await item.destroy();
   return item;
-};
-
-
-
-
-exports.getByPolSysId = async (RPTA_POL_SYS_ID, RPTA_END_NO_IDX, RPTA_END_SR_NO) => {
-  if (!RPTA_POL_SYS_ID) {
-    throw new Error("RPTA_POL_SYS_ID is required");
-  }
-
-  const whereClause = { RPTA_POL_SYS_ID };
-  
-  if (RPTA_END_NO_IDX !== undefined && !isNaN(RPTA_END_NO_IDX)) {
-    whereClause.RPTA_END_NO_IDX = RPTA_END_NO_IDX;
-  }
-  
-  if (RPTA_END_SR_NO !== undefined && !isNaN(RPTA_END_SR_NO)) {
-    whereClause.RPTA_END_SR_NO = RPTA_END_SR_NO;
-  }
-
-  const items = await PGITRIPROPTTYALLOC.findAll({
-    where: whereClause,
-    raw: true
-  });
-
-  return items;
-};
-
-
-
-exports.getById = async ({ RPTA_POL_SYS_ID, RPTA_END_NO_IDX, RPTA_END_SR_NO }) => {
-  const items = await PGITRIPROPTTYALLOC.findAll({
-    where: { RPTA_POL_SYS_ID, RPTA_END_NO_IDX, RPTA_END_SR_NO },
-    raw: true
-  });
-
-  const groupedResult = items.reduce((acc, row) => {
-    const key = row.RPTA_RPTDG_SYS_ID;
-    (acc[key] ??= []).push(row);
-    return acc;
-  }, {});
-
-  return groupedResult;
 };

@@ -254,14 +254,14 @@ module.exports = (sequelize, DataTypes) => {
     }
     ,
    RI_DED_INW_COMM: { 
-      type: DataTypes.STRING(12), 
+      type: DataTypes.INTEGER, 
       allowNull: true, 
       
       field: 'RI_DED_INW_COMM' 
     }
     ,
    RI_PREM_TYPE: { 
-      type: DataTypes.STRING(12), 
+      type: DataTypes.STRING(10), 
       allowNull: true, 
       
       field: 'RI_PREM_TYPE' 
@@ -272,20 +272,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true, 
       
       field: 'RI_BORDX_ACNT_DT' 
-    }
-    ,
-   RI_LINK_POL_NO: { 
-      type: DataTypes.STRING(60), 
-      allowNull: true, 
-      
-      field: 'RI_LINK_POL_NO' 
-    }
-    ,
-   RI_UPD_SUMM_YN: { 
-      type: DataTypes.STRING(1), 
-      allowNull: true, 
-      
-      field: 'RI_UPD_SUMM_YN' 
     }
     
     }, {

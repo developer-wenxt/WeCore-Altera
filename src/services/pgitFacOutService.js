@@ -42,9 +42,18 @@ exports.deleteItem = async (id) => {
 };
 
 
-exports.getByPolSysId = async (FO_POL_SYS_ID) => {
+exports.getByPolSysId = async (FO_POL_SYS_ID, FO_END_NO_IDX, FO_END_SR_NO) => {
+  const whereClause = { FO_POL_SYS_ID };
+
+  if (FO_END_NO_IDX !== null && FO_END_NO_IDX !== undefined && !isNaN(FO_END_NO_IDX)) {
+    whereClause.FO_END_NO_IDX = FO_END_NO_IDX;
+  }
+  if (FO_END_SR_NO !== null && FO_END_SR_NO !== undefined && !isNaN(FO_END_SR_NO)) {
+    whereClause.FO_END_SR_NO = FO_END_SR_NO;
+  }
+
   const items = await PgitFacOut.findAll({
-    where: { FO_POL_SYS_ID }, 
+    where: whereClause, 
     raw: true
   });
 

@@ -102,7 +102,8 @@ class DropdownService {
       FPS_FAC_RATE_BASIS: "SELECT PARA_SUB_CODE, PARA_NAME FROM PCOM_APP_PARAMETER WHERE PARA_CODE = 'FAC_RATE_BAS'",
       FPS_BUS_TYPE: "SELECT PARA_SUB_CODE, PARA_NAME FROM PCOM_APP_PARAMETER WHERE PARA_CODE = 'BUS_TYPE' AND PARA_SUB_CODE IN ( '25','7','13')",
       FPS_FAC_ACNT_TO: "SELECT PARA_SUB_CODE, PARA_NAME FROM PCOM_APP_PARAMETER WHERE PARA_CODE = 'RI_ACNT_TO'",
-      POL_END_CODE: "SELECT PGIM_DOC_SETUP.ROWID, DS_CODE, DS_DESC, NULL, NULL FROM PGIM_DOC_SETUP, PGIM_DOC_APPL_PRODUCT WHERE DS_TYPE = '3' AND PGIM_DOC_SETUP.DS_TYPE = PGIM_DOC_APPL_PRODUCT.DAP_DS_TYPE AND PGIM_DOC_SETUP.DS_CODE = PGIM_DOC_APPL_PRODUCT.DAP_DS_CODE AND DAP_PROD_CODE = :prodCode AND (SYSDATE BETWEEN NVL(DS_EFF_FM_DT, SYSDATE) AND NVL(DS_EFF_TO_DT, SYSDATE)) AND NVL('0', '0') = '0' AND ((PGIM_DOC_SETUP.DS_END_TYPE = '029' AND NVL('0', '0') = '1') OR (PGIM_DOC_SETUP.DS_END_TYPE <> '029' AND NVL('0', '0') = '0')) AND ((PGIM_DOC_SETUP.DS_END_TYPE = '030' AND ((NVL(:polSts, 'CO') = 'C' AND PGIM_DOC_SETUP.DS_REIN_ENDT_YN = '1') OR (NVL(:polSts, 'CO') = 'E' AND PGIM_DOC_SETUP.DS_REIN_ENDT_YN = '0'))) OR (PGIM_DOC_SETUP.DS_END_TYPE <> '030' AND NVL(:polSts, 'CO') <> 'C')) AND ((DS_END_TYPE = '009' AND EXISTS (SELECT 1 FROM PGIT_CLM_APPL_POLICY, PGIT_CLM_SETL WHERE CLMAP_POL_SYS_ID = :pol_sys_id AND CS_CLM_SYS_ID = CLMAP_CLM_SYS_ID AND NVL(CLMAP_REINST_REQD_YN,'0') = '1' AND CS_FINAL_YN = '1' AND NVL(CS_REINST_DONE_YN, '0') = '0' AND CS_SETL_STS = 'P')) OR (DS_END_TYPE <> '009' AND NOT EXISTS (SELECT 1 FROM PGIT_CLM_APPL_POLICY, PGIT_CLM_SETL WHERE CLMAP_POL_SYS_ID = :pol_sys_id AND CS_CLM_SYS_ID = CLMAP_CLM_SYS_ID AND NVL(CLMAP_REINST_REQD_YN,'0') = '1' AND CS_FINAL_YN = '1' AND NVL(CS_REINST_DONE_YN, '0') = '0' AND CS_SETL_STS = 'P'))) AND 1 = 1",
+      POL_END_CODE:"SELECT PGIM_DOC_SETUP.DS_CODE, DS_DESC FROM PGIM_DOC_SETUP, PGIM_DOC_APPL_PRODUCT WHERE DS_TYPE = '3' AND PGIM_DOC_SETUP.DS_TYPE = PGIM_DOC_APPL_PRODUCT.DAP_DS_TYPE AND PGIM_DOC_SETUP.DS_CODE = PGIM_DOC_APPL_PRODUCT.DAP_DS_CODE AND DAP_PROD_CODE = :prodCode AND (SYSDATE BETWEEN NVL(DS_EFF_FM_DT, SYSDATE) AND NVL(DS_EFF_TO_DT, SYSDATE)) AND NVL('0', '0') = '0' AND ((PGIM_DOC_SETUP.DS_END_TYPE = '029' AND NVL('0', '0') = '1') OR (PGIM_DOC_SETUP.DS_END_TYPE <> '029' AND NVL('0', '0') = '0')) AND ((PGIM_DOC_SETUP.DS_END_TYPE = '030' AND ((NVL(:polSts, 'CO') = 'C' AND PGIM_DOC_SETUP.DS_REIN_ENDT_YN = '1') OR (NVL(:polSts, 'CO') = 'E' AND PGIM_DOC_SETUP.DS_REIN_ENDT_YN = '0'))) OR (PGIM_DOC_SETUP.DS_END_TYPE <> '030' AND NVL(:polSts, 'CO') <> 'C'));" ,
+      PRAI_RISK_CLASS_CODE:"SELECT PC_CODE,PC_DESC  FROM PCOM_CODES WHERE PC_TYPE = 'RISK_CLASS' AND PC_VALUE = '20'  AND  (SELECT TRUNC(POL_FM_DT) FROM PGIT_POLICY  WHERE POL_SYS_ID =:pol_sys_id)  BETWEEN PC_EFF_FM_DT AND PC_EFF_TO_DT",
     };
 
     // ----------- SPECIAL QUERIES WITH FILTER ADDED ------------
@@ -127,9 +128,11 @@ class DropdownService {
         bind.prodCode = prodCode || null;
         bind.polSts = polSts || null;
         bind.pol_sys_id = pol_sys_id || null;
+      } else if (PLD_FIELD_NAME === "PRAI_RISK_CLASS_CODE") {
+        bind.pol_sys_id = pol_sys_id || null;
       }
 
-
+                    
       if (filter && filter.trim()) {
         if (PLD_FIELD_NAME === "PCD_CODE") {
           sql += ` AND UPPER(PADED_DESC) LIKE UPPER(:filterStr)`;
@@ -183,21 +186,21 @@ class DropdownService {
 
     // FIXED BIND - Correct priority for SMI queries
     let bind = {
-      langCode: queryParams.langCode ?? "ENG",
-      loginAppCode: queryParams.loginAppCode ?? "01",
-      custCode: custCode ?? null,
-      prodCode: prodCode ?? null,
-      secCode: secCode ?? null,
-      polFmDt: polFmDt ?? null,
-      pol_sys_id: pol_sys_id ?? null,
-      polSts: polSts ?? null,
+      langCode: queryParams.langCode || "ENG",
+      loginAppCode: queryParams.loginAppCode || "01",
+      custCode: custCode || null,
+      prodCode: prodCode || null,
+      secCode: secCode || null,
+      polFmDt: polFmDt || null,
+      pol_sys_id: pol_sys_id || null,
+      polSts: polSts || null,
 
       // SMI queries need: P_PARA_1=prodCode, P_PARA_2=secCode
-      P_PARA_1: queryParams.P_PARA_1  ?? "ENG" ?? prodCode,
-      P_PARA_2: queryParams.P_PARA_2 ?? pol_sys_id ?? secCode ?? custCode ?? prodCode ?? "01" ?? "0",
-      P_PARA_3: queryParams.P_PARA_3 ?? prodCode ?? secCode ?? polFmDt ?? null ?? "0",
-      P_PARA_4: queryParams.P_PARA_4 ?? null ?? polSts,
-      P_PARA_5: queryParams.P_PARA_5 ?? null ?? pol_sys_id,
+      P_PARA_1: queryParams.P_PARA_1 || prodCode || "ENG",
+      P_PARA_2: queryParams.P_PARA_2 || pol_sys_id || secCode || custCode || prodCode || "01",
+      P_PARA_3: queryParams.P_PARA_3 || pol_sys_id || prodCode || secCode || polFmDt || "0",
+      P_PARA_4: queryParams.P_PARA_4 || polSts || null,
+      P_PARA_5: queryParams.P_PARA_5 || pol_sys_id || null,
     };
 
     // Convert dates only if used in SQL
