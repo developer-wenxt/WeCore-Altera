@@ -47,6 +47,8 @@ const pgitPolCoinCommRouter = require('./pgitPolCoinComm');
 const PGITRIPROPTTYALLOCCUSTRouter = require('./PGITRIPROPTTYALLOCCUST');
 const PGITRIPROPTTYALLOCRCRouter = require('./PGITRIPROPTTYALLOCRC');
 const pgitFacPlaceRiskDtlRouter = require('./pgitFacPlaceRiskDtl');
+const PGITPOLBROKERRouter = require('./PGITPOLBROKER');
+const PGITPOLCHARGERouter = require('./PGITPOLCHARGE');
 const router = express.Router();
 const lmCompanyRoutes=require('./lmCompanyRoutes');
 const class_of_busRoute = require('./class_of_busRoute');
@@ -284,4 +286,6 @@ router.use('/endBtn', endBtnRoute);
 
 
 router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
+router.use('/PGITPOLBROKER', PGITPOLBROKERRouter);
+router.use('/PGITPOLCHARGE', PGITPOLCHARGERouter);
 module.exports = router;

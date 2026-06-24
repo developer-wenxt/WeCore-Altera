@@ -124,3 +124,25 @@ exports.getByPolSysId = async (PRAI_POL_SYS_ID , PRAI_PSEC_SYS_ID) => {
   // };
 };
 
+exports.deleteRiskProcedure = async (polSysId, praiSysId) => {
+  try {
+    await sequelize.query(
+      `
+      BEGIN
+        PR_DELETE_RISK(P_POL_SYS_ID   => :polSysId,
+                       P_PRAI_SYS_ID  => :praiSysId);
+      END;
+      `,
+      {
+        replacements: { polSysId, praiSysId },
+        type: sequelize.QueryTypes.RAW,
+      }
+    );
+    return {
+      success: true,
+      message: 'Risk deleted successfully',
+    };
+  } catch (error) {
+    throw error;
+  }
+};

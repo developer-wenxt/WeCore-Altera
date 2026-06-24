@@ -69,3 +69,25 @@ exports.getByPolSysId = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteRiskProcedure = async (req, res, next) => {
+  try {
+    const { polSysId, praiSysId } = req.body;
+
+    if (!polSysId || !praiSysId) {
+      return res.status(400).json({
+        success: false,
+        message: "polSysId and praiSysId are required"
+      });
+    }
+
+    const result = await PGITPOLRISKADDLINFOService.deleteRiskProcedure(
+      Number(polSysId),
+      Number(praiSysId)
+    );
+
+    return successResponse(res, 200, "Risk procedure executed successfully", result);
+  } catch (err) {
+    next(err);
+  }
+};

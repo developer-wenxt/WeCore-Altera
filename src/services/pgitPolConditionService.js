@@ -1,4 +1,4 @@
-const { PgitPolCondition ,sequelize } = require('../models');
+const { PGITPOLCONDITION: PgitPolCondition, sequelize } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PgitPolCondition.findAll({ where: filters, limit, offset, ...(order && { order }) });
@@ -35,12 +35,12 @@ exports.deleteItem = async (id) => {
 };
 
 
-exports.getByPolSysId = async (pcon_pol_sys_id) => {
+exports.getByPolSysId = async (PCON_POL_SYS_ID) => {
   const items = await PgitPolCondition.findAll({
-    where: { pcon_pol_sys_id },raw: true
+    where: { PCON_POL_SYS_ID },raw: true
   });
     const groupedResult = items.reduce((acc, row) => {
-    const key = row.pcon_sys_id;
+    const key = row.PCON_SYS_ID;
     (acc[key] ??= []).push(row);
     return acc;
   }, {});
@@ -78,7 +78,7 @@ exports.saveRiskCover = async (data) => {
 
     for (const item of payload) {
       // Already has SYS_ID → skip
-      if (item.pcon_sys_id) {
+      if (item.PCON_SYS_ID) {
         skippedRecords.push({
           reason: 'SYS_ID already present',
           item
@@ -87,22 +87,22 @@ exports.saveRiskCover = async (data) => {
       }
 
       const {
-        pcon_pol_sys_id,
-        pcon_end_no_idx,
-        pcon_end_sr_no,
-        pcon_sr_no,
-        pcon_psec_sys_id,
-        pcon_lvl1_sys_id
+        PCON_POL_SYS_ID,
+        PCON_END_NO_IDX,
+        PCON_END_SR_NO,
+        PCON_SR_NO,
+        PCON_PSEC_SYS_ID,
+        PCON_LVL1_SYS_ID
       } = item;
 
       const existing = await PgitPolCondition.findOne({
         where: {
-          pcon_pol_sys_id,
-          pcon_end_no_idx,
-          pcon_end_sr_no,
-          pcon_sr_no,
-          pcon_psec_sys_id,
-          pcon_lvl1_sys_id
+          PCON_POL_SYS_ID,
+          PCON_END_NO_IDX,
+          PCON_END_SR_NO,
+          PCON_SR_NO,
+          PCON_PSEC_SYS_ID,
+          PCON_LVL1_SYS_ID
         },
         transaction
       });
@@ -111,7 +111,7 @@ exports.saveRiskCover = async (data) => {
         // ❌ Single save → error
         if (!isBulk) {
           throw new Error(
-            `Duplicate Condition found for SR_NO ${pcon_sr_no} (Risk ${pcon_lvl1_sys_id})`
+            `Duplicate Condition found for SR_NO ${PCON_SR_NO} section ${PCON_PSEC_SYS_ID}  )`
           );
         }
 
@@ -119,12 +119,12 @@ exports.saveRiskCover = async (data) => {
         skippedRecords.push({
           reason: 'Already exists in DB',
           keys: {
-            pcon_pol_sys_id,
-            pcon_end_no_idx,
-            pcon_end_sr_no,
-            pcon_sr_no,
-            pcon_psec_sys_id,
-            pcon_lvl1_sys_id
+            PCON_POL_SYS_ID,
+            PCON_END_NO_IDX,
+            PCON_END_SR_NO,
+            PCON_SR_NO,
+            PCON_PSEC_SYS_ID,
+            PCON_LVL1_SYS_ID
           }
         });
         continue;
@@ -134,7 +134,7 @@ exports.saveRiskCover = async (data) => {
 
       const payloadToSave = {
         ...item,
-        pcon_sys_id: nextId
+        PCON_SYS_ID: nextId
       };
 
       Object.keys(payloadToSave).forEach(

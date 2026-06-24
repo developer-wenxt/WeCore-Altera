@@ -1,6 +1,139 @@
 module.exports = (sequelize, DataTypes) => {
   const PGITPOLHYPOTHECATION = sequelize.define('PGITPOLHYPOTHECATION', {
-       PHPO_SYS_ID: { 
+       PHPO_PROD_CODE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PHPO_PROD_CODE' 
+    }
+    ,
+   PHPO_ORG_BANK_LOAN_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'PHPO_ORG_BANK_LOAN_LC_1' 
+    }
+    ,
+   PHPO_ORG_BANK_LOAN_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'PHPO_ORG_BANK_LOAN_LC_2' 
+    }
+    ,
+   PHPO_ORG_BANK_LOAN_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'PHPO_ORG_BANK_LOAN_LC_3' 
+    }
+    ,
+   PHPO_BANK_ADDR_02: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_ADDR_02' 
+    }
+    ,
+   PHPO_BANK_ADDR_03: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_ADDR_03' 
+    }
+    ,
+   PHPO_BANK_STATE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_STATE' 
+    }
+    ,
+   PHPO_BANK_CITY: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_CITY' 
+    }
+    ,
+   PHPO_BANK_PIN_CODE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_PIN_CODE' 
+    }
+    ,
+   PHPO_BANK_ADDR_01: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_ADDR_01' 
+    }
+    ,
+   PHPO_BANK_PINCODE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_PINCODE' 
+    }
+    ,
+   PHPO_FLEX_11: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_FLEX_11' 
+    }
+    ,
+   PHPO_FLEX_12: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_FLEX_12' 
+    }
+    ,
+   PHPO_FLEX_13: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_FLEX_13' 
+    }
+    ,
+   PHPO_FLEX_14: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_FLEX_14' 
+    }
+    ,
+   PHPO_FLEX_15: { 
+      type: DataTypes.STRING(240), 
+      allowNull: true, 
+      
+      field: 'PHPO_FLEX_15' 
+    }
+    ,
+   PHPO_PRS_SYS_ID: { 
+      type: DataTypes.INTEGER, 
+      allowNull: true, 
+      
+      field: 'PHPO_PRS_SYS_ID' 
+    }
+    ,
+   PHPO_BANK_COUNTY: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PHPO_BANK_COUNTY' 
+    }
+    ,
+   PHPO_CNCT_SYS_ID: { 
+      type: DataTypes.INTEGER, 
+      allowNull: true, 
+      
+      field: 'PHPO_CNCT_SYS_ID' 
+    }
+    ,
+   PHPO_SYS_ID: { 
       type: DataTypes.INTEGER, 
       allowNull: false, 
       primaryKey: true,
@@ -314,139 +447,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true, 
       
       field: 'PHPO_DS_TYPE' 
-    }
-    ,
-   PHPO_PROD_CODE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PHPO_PROD_CODE' 
-    }
-    ,
-   PHPO_ORG_BANK_LOAN_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PHPO_ORG_BANK_LOAN_LC_1' 
-    }
-    ,
-   PHPO_ORG_BANK_LOAN_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PHPO_ORG_BANK_LOAN_LC_2' 
-    }
-    ,
-   PHPO_ORG_BANK_LOAN_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PHPO_ORG_BANK_LOAN_LC_3' 
-    }
-    ,
-   PHPO_BANK_ADDR_02: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_ADDR_02' 
-    }
-    ,
-   PHPO_BANK_ADDR_03: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_ADDR_03' 
-    }
-    ,
-   PHPO_BANK_STATE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_STATE' 
-    }
-    ,
-   PHPO_BANK_CITY: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_CITY' 
-    }
-    ,
-   PHPO_BANK_PIN_CODE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_PIN_CODE' 
-    }
-    ,
-   PHPO_BANK_ADDR_01: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_ADDR_01' 
-    }
-    ,
-   PHPO_BANK_PINCODE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_PINCODE' 
-    }
-    ,
-   PHPO_FLEX_11: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_FLEX_11' 
-    }
-    ,
-   PHPO_FLEX_12: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_FLEX_12' 
-    }
-    ,
-   PHPO_FLEX_13: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_FLEX_13' 
-    }
-    ,
-   PHPO_FLEX_14: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_FLEX_14' 
-    }
-    ,
-   PHPO_FLEX_15: { 
-      type: DataTypes.STRING(240), 
-      allowNull: true, 
-      
-      field: 'PHPO_FLEX_15' 
-    }
-    ,
-   PHPO_PRS_SYS_ID: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'PHPO_PRS_SYS_ID' 
-    }
-    ,
-   PHPO_BANK_COUNTY: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PHPO_BANK_COUNTY' 
-    }
-    ,
-   PHPO_CNCT_SYS_ID: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true, 
-      
-      field: 'PHPO_CNCT_SYS_ID' 
     }
     
     }, {

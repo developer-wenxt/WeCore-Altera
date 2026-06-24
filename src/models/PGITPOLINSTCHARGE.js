@@ -1,6 +1,119 @@
 module.exports = (sequelize, DataTypes) => {
   const PGITPOLINSTCHARGE = sequelize.define('PGITPOLINSTCHARGE', {
-       PIC_COMP_CODE: { 
+       PIC_SYS_ID: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false, 
+      primaryKey: true,
+      autoIncrement: true,
+      field: 'PIC_SYS_ID' 
+    }
+    ,
+   PIC_POL_SYS_ID: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false, 
+      
+      field: 'PIC_POL_SYS_ID' 
+    }
+    ,
+   PIC_END_NO_IDX: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false, 
+      
+      field: 'PIC_END_NO_IDX' 
+    }
+    ,
+   PIC_END_SR_NO: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false, 
+      
+      field: 'PIC_END_SR_NO' 
+    }
+    ,
+   PIC_INST_NO: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false, 
+      
+      field: 'PIC_INST_NO' 
+    }
+    ,
+   PIC_PREM_CURR_CODE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: false, 
+      
+      field: 'PIC_PREM_CURR_CODE' 
+    }
+    ,
+   PIC_TAX_CHRG_TYPE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: false, 
+      
+      field: 'PIC_TAX_CHRG_TYPE' 
+    }
+    ,
+   PIC_TAX_CHRG_CODE: { 
+      type: DataTypes.STRING(12), 
+      allowNull: false, 
+      
+      field: 'PIC_TAX_CHRG_CODE' 
+    }
+    ,
+   PIC_TAX_CHRG_FC: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: false, 
+      
+      field: 'PIC_TAX_CHRG_FC' 
+    }
+    ,
+   PIC_TAX_CHRG_LC_1: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'PIC_TAX_CHRG_LC_1' 
+    }
+    ,
+   PIC_TAX_CHRG_LC_2: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'PIC_TAX_CHRG_LC_2' 
+    }
+    ,
+   PIC_TAX_CHRG_LC_3: { 
+      type: DataTypes.DECIMAL(20, 3), 
+      allowNull: true, 
+      
+      field: 'PIC_TAX_CHRG_LC_3' 
+    }
+    ,
+   PIC_CR_UID: { 
+      type: DataTypes.STRING(12), 
+      allowNull: false, 
+      
+      field: 'PIC_CR_UID' 
+    }
+    ,
+   PIC_CR_DT: { 
+      type: DataTypes.DATE, 
+      allowNull: false, 
+      
+      field: 'PIC_CR_DT' 
+    }
+    ,
+   PIC_UPD_UID: { 
+      type: DataTypes.STRING(12), 
+      allowNull: true, 
+      
+      field: 'PIC_UPD_UID' 
+    }
+    ,
+   PIC_UPD_DT: { 
+      type: DataTypes.DATE, 
+      allowNull: true, 
+      
+      field: 'PIC_UPD_DT' 
+    }
+    ,
+   PIC_COMP_CODE: { 
       type: DataTypes.STRING(12), 
       allowNull: false, 
       
@@ -194,182 +307,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true, 
       
       field: 'PIC_CNCT_SYS_ID' 
-    }
-    ,
-   PIC_COLL_CHG_AMT_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_COLL_CHG_AMT_FC' 
-    }
-    ,
-   PIC_COLL_CHG_AMT_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_COLL_CHG_AMT_LC_1' 
-    }
-    ,
-   PIC_COLL_CHG_AMT_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_COLL_CHG_AMT_LC_2' 
-    }
-    ,
-   PIC_COLL_CHG_AMT_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_COLL_CHG_AMT_LC_3' 
-    }
-    ,
-   PIC_ORG_COLL_CHG_AMT_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_ORG_COLL_CHG_AMT_FC' 
-    }
-    ,
-   PIC_ORG_COLL_CHG_AMT_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_ORG_COLL_CHG_AMT_LC_1' 
-    }
-    ,
-   PIC_ORG_COLL_CHG_AMT_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_ORG_COLL_CHG_AMT_LC_2' 
-    }
-    ,
-   PIC_ORG_COLL_CHG_AMT_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_ORG_COLL_CHG_AMT_LC_3' 
-    }
-    ,
-   PIC_DN_COLLEC_STS: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PIC_DN_COLLEC_STS' 
-    }
-    ,
-   PIC_SYS_ID: { 
-      type: DataTypes.INTEGER, 
-      allowNull: false, 
-      primaryKey: true,
-      autoIncrement: true,
-      field: 'PIC_SYS_ID' 
-    }
-    ,
-   PIC_POL_SYS_ID: { 
-      type: DataTypes.INTEGER, 
-      allowNull: false, 
-      
-      field: 'PIC_POL_SYS_ID' 
-    }
-    ,
-   PIC_END_NO_IDX: { 
-      type: DataTypes.INTEGER, 
-      allowNull: false, 
-      
-      field: 'PIC_END_NO_IDX' 
-    }
-    ,
-   PIC_END_SR_NO: { 
-      type: DataTypes.INTEGER, 
-      allowNull: false, 
-      
-      field: 'PIC_END_SR_NO' 
-    }
-    ,
-   PIC_INST_NO: { 
-      type: DataTypes.INTEGER, 
-      allowNull: false, 
-      
-      field: 'PIC_INST_NO' 
-    }
-    ,
-   PIC_PREM_CURR_CODE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: false, 
-      
-      field: 'PIC_PREM_CURR_CODE' 
-    }
-    ,
-   PIC_TAX_CHRG_TYPE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: false, 
-      
-      field: 'PIC_TAX_CHRG_TYPE' 
-    }
-    ,
-   PIC_TAX_CHRG_CODE: { 
-      type: DataTypes.STRING(12), 
-      allowNull: false, 
-      
-      field: 'PIC_TAX_CHRG_CODE' 
-    }
-    ,
-   PIC_TAX_CHRG_FC: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: false, 
-      
-      field: 'PIC_TAX_CHRG_FC' 
-    }
-    ,
-   PIC_TAX_CHRG_LC_1: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_TAX_CHRG_LC_1' 
-    }
-    ,
-   PIC_TAX_CHRG_LC_2: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_TAX_CHRG_LC_2' 
-    }
-    ,
-   PIC_TAX_CHRG_LC_3: { 
-      type: DataTypes.DECIMAL(20, 3), 
-      allowNull: true, 
-      
-      field: 'PIC_TAX_CHRG_LC_3' 
-    }
-    ,
-   PIC_CR_UID: { 
-      type: DataTypes.STRING(12), 
-      allowNull: false, 
-      
-      field: 'PIC_CR_UID' 
-    }
-    ,
-   PIC_CR_DT: { 
-      type: DataTypes.DATE, 
-      allowNull: false, 
-      
-      field: 'PIC_CR_DT' 
-    }
-    ,
-   PIC_UPD_UID: { 
-      type: DataTypes.STRING(12), 
-      allowNull: true, 
-      
-      field: 'PIC_UPD_UID' 
-    }
-    ,
-   PIC_UPD_DT: { 
-      type: DataTypes.DATE, 
-      allowNull: true, 
-      
-      field: 'PIC_UPD_DT' 
     }
     
     }, {

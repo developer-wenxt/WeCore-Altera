@@ -1,4 +1,4 @@
-const { PgitPolCharge ,sequelize} = require('../models');
+const { PGITPOLCHARGE: PgitPolCharge, sequelize } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PgitPolCharge.findAll({ where: filters, limit, offset, ...(order && { order }) });
@@ -43,7 +43,7 @@ exports.getByPolSysId = async (PCHG_POL_SYS_ID) => {
   });
 
   const groupedResult = items.reduce((acc, row) => {
-    const key = row.pchg_sys_id; 
+    const key = row.PCHG_SYS_ID; 
     (acc[key] ??= []).push(row);
     return acc;
   }, {});
@@ -75,7 +75,7 @@ exports.saveRiskCover = async (data) => {
 
     for (const item of payload) {
       // SYS_ID already exists → skip
-      if (item.pchg_sys_id) {
+      if (item.PCHG_SYS_ID) {
         skippedRecords.push({
           reason: 'SYS_ID already present',
           item
@@ -84,18 +84,18 @@ exports.saveRiskCover = async (data) => {
       }
 
       const {
-        pchg_pol_sys_id,
-        pchg_end_no_idx,
-        pchg_end_sr_no,
-        pchg_sr_no
+        PCHG_POL_SYS_ID,
+        PCHG_END_NO_IDX,
+        PCHG_END_SR_NO,
+        PCHG_SR_NO
       } = item;
 
       const existing = await PgitPolCharge.findOne({
         where: {
-          pchg_pol_sys_id,
-          pchg_end_no_idx,
-          pchg_end_sr_no,
-          pchg_sr_no
+          PCHG_POL_SYS_ID,
+          PCHG_END_NO_IDX,
+          PCHG_END_SR_NO,
+          PCHG_SR_NO
         },
         transaction
       });
@@ -104,7 +104,7 @@ exports.saveRiskCover = async (data) => {
         // ❌ Single insert → ERROR
         if (!isBulk) {
           throw new Error(
-            `Duplicate Charge not allowed for SR_NO ${pchg_sr_no}`
+            `Duplicate Charge not allowed for SR_NO ${PCHG_SR_NO}`
           );
         }
 
@@ -112,10 +112,10 @@ exports.saveRiskCover = async (data) => {
         skippedRecords.push({
           reason: 'Already exists in DB',
           keys: {
-            pchg_pol_sys_id,
-            pchg_end_no_idx,
-            pchg_end_sr_no,
-            pchg_sr_no
+            PCHG_POL_SYS_ID,
+            PCHG_END_NO_IDX,
+            PCHG_END_SR_NO,
+            PCHG_SR_NO
           }
         });
         continue;
@@ -125,7 +125,7 @@ exports.saveRiskCover = async (data) => {
 
       const payloadToSave = {
         ...item,
-        pchg_sys_id: nextId
+        PCHG_SYS_ID: nextId
       };
 
       Object.keys(payloadToSave).forEach(

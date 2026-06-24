@@ -1,4 +1,4 @@
-const { PgitPolBroker ,sequelize} = require('../models');
+const { PGITPOLBROKER: PgitPolBroker, sequelize } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PgitPolBroker.findAll({ where: filters, limit, offset, ...(order && { order }) });
@@ -45,7 +45,7 @@ exports.getByPolSysId = async (PBRK_POL_SYS_ID) => {
   });
 
   const groupedResult = items.reduce((acc, row) => {
-    const key = row.pbrk_sys_id; 
+    const key = row.PBRK_SYS_ID; 
     (acc[key] ??= []).push(row);
     return acc;
   }, {});
@@ -74,7 +74,7 @@ exports.saveRiskCover = async (data) => {
 
     for (const item of payload) {
       // If SYS_ID already exists → skip
-      if (item.pbrk_sys_id) {
+      if (item.PBRK_SYS_ID) {
         skippedRecords.push({
           reason: 'SYS_ID already present',
           item
@@ -83,22 +83,22 @@ exports.saveRiskCover = async (data) => {
       }
 
       const {
-        pbrk_pol_sys_id,
-        pbrk_end_no_idx,
-        pbrk_end_sr_no,
-        pbrk_psec_sys_id,
-        pbrk_brk_code,
-        pbrk_comm_code
+        PBRK_POL_SYS_ID,
+        PBRK_END_NO_IDX,
+        PBRK_END_SR_NO,
+        PBRK_PSEC_SYS_ID,
+        PBRK_BRK_CODE,
+        PBRK_COMM_CODE
       } = item;
 
       const existing = await PgitPolBroker.findOne({
         where: {
-          pbrk_pol_sys_id,
-          pbrk_end_no_idx,
-          pbrk_end_sr_no,
-          pbrk_psec_sys_id,
-          pbrk_brk_code,
-          pbrk_comm_code
+          PBRK_POL_SYS_ID,
+          PBRK_END_NO_IDX,
+          PBRK_END_SR_NO,
+          PBRK_PSEC_SYS_ID,
+          PBRK_BRK_CODE,
+          PBRK_COMM_CODE
         },
         transaction
       });
@@ -107,7 +107,7 @@ exports.saveRiskCover = async (data) => {
         // ❌ Single insert → ERROR
         if (!isBulk) {
           throw new Error(
-            `Duplicate Broker not allowed for BRK=${pbrk_brk_code} and COMM=${pbrk_comm_code}`
+            `Duplicate Broker not allowed for BRK=${PBRK_BRK_CODE} and COMM=${PBRK_COMM_CODE}`
           );
         }
 
@@ -115,12 +115,12 @@ exports.saveRiskCover = async (data) => {
         skippedRecords.push({
           reason: 'Already exists in DB',
           keys: {
-            pbrk_pol_sys_id,
-            pbrk_end_no_idx,
-            pbrk_end_sr_no,
-            pbrk_psec_sys_id,
-            pbrk_brk_code,
-            pbrk_comm_code
+            PBRK_POL_SYS_ID,
+            PBRK_END_NO_IDX,
+            PBRK_END_SR_NO,
+            PBRK_PSEC_SYS_ID,
+            PBRK_BRK_CODE,
+            PBRK_COMM_CODE
           }
         });
         continue;
@@ -130,7 +130,7 @@ exports.saveRiskCover = async (data) => {
 
       const payloadToSave = {
         ...item,
-        pbrk_sys_id: nextId
+        PBRK_SYS_ID: nextId
       };
 
       Object.keys(payloadToSave).forEach(

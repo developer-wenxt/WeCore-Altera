@@ -8,4 +8,4 @@ exports.get = async () => {
   });
 
   return records;
-};z
+};

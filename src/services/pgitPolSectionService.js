@@ -106,3 +106,25 @@ exports.getByPolSysId = async (PSEC_POL_SYS_ID) => {
   // };
 };
 
+exports.deleteSectionProcedure = async (polSysId, psecSysId) => {
+  try {
+    await sequelize.query(
+      `
+      BEGIN
+        PR_DELETE_SECTION(P_POL_SYS_ID   => :polSysId,
+                          P_PSEC_SYS_ID  => :psecSysId);
+      END;
+      `,
+      {
+        replacements: { polSysId, psecSysId },
+        type: sequelize.QueryTypes.RAW,
+      }
+    );
+    return {
+      success: true,
+      message: 'Section deleted successfully',
+    };
+  } catch (error) {
+    throw error;
+  }
+};

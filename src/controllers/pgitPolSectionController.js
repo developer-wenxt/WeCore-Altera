@@ -58,3 +58,25 @@ exports.getByPolSysId = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteSectionProcedure = async (req, res, next) => {
+  try {
+    const { polSysId, psecSysId } = req.body;
+
+    if (!polSysId || !psecSysId) {
+      return res.status(400).json({
+        success: false,
+        message: "polSysId and psecSysId are required"
+      });
+    }
+
+    const result = await pgitPolSectionService.deleteSectionProcedure(
+      Number(polSysId),
+      Number(psecSysId)
+    );
+
+    return successResponse(res, 200, "Section procedure executed successfully", result);
+  } catch (err) {
+    next(err);
+  }
+};

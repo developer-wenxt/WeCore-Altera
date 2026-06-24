@@ -7,6 +7,7 @@ router.post('/', pgitPolSectionController.create);
 router.put('/:id', pgitPolSectionController.update);
 router.delete('/:id', pgitPolSectionController.deleteItem);
 router.get('/secPolId', pgitPolSectionController.getByPolSysId);
+router.post('/deleteSection', pgitPolSectionController.deleteSectionProcedure);
 
 
 module.exports = router;
