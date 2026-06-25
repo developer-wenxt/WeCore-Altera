@@ -1,4 +1,4 @@
-const { PGITPOLCONDITION: PgitPolCondition, sequelize } = require('../models');
+const { PgitPolCondition, sequelize } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PgitPolCondition.findAll({ where: filters, limit, offset, ...(order && { order }) });
