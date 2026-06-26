@@ -1,4 +1,4 @@
-const { PgitPolRiskAddlInfo: PGITPOLRISKADDLINFO , sequelize} = require('../models');
+const { PGITPOLRISKADDLINFO, sequelize } = require('../models');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PGITPOLRISKADDLINFO.findAll({ where: filters, limit, offset, ...(order && { order }) });

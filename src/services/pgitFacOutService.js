@@ -1,8 +1,8 @@
-const { PgitFacOut, sequelize } = require('../models');
+const { PGITFACOUT, sequelize } = require('../models');
 const { QueryTypes } = require('sequelize');
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
-  return PgitFacOut.findAll({ where: filters, limit, offset, ...(order && { order }) });
+  return PGITFACOUT.findAll({ where: filters, limit, offset, ...(order && { order }) });
 };
 
 async function getNextFoSysId() {
@@ -16,11 +16,11 @@ async function getNextFoSysId() {
 exports.create = async (data) => {
   const nextId = await getNextFoSysId();
   data.FO_SYS_ID = nextId;
-  return await PgitFacOut.create(data);
+  return await PGITFACOUT.create(data);
 };
 
 exports.update = async (id, updatedData) => {
-  const item = await PgitFacOut.findByPk(id);
+  const item = await PGITFACOUT.findByPk(id);
   if (!item) {
     const error = new Error(`PgitFacOut with ID ${id} not found`);
     error.statusCode = 404;
@@ -31,7 +31,7 @@ exports.update = async (id, updatedData) => {
 };
 
 exports.deleteItem = async (id) => {
-  const item = await PgitFacOut.findByPk(id);
+  const item = await PGITFACOUT.findByPk(id);
   if (!item) {
     const error = new Error(`PgitFacOut with ID ${id} not found`);
     error.statusCode = 404;
@@ -52,7 +52,7 @@ exports.getByPolSysId = async (FO_POL_SYS_ID, FO_END_NO_IDX, FO_END_SR_NO) => {
     whereClause.FO_END_SR_NO = FO_END_SR_NO;
   }
 
-  const items = await PgitFacOut.findAll({
+  const items = await PGITFACOUT.findAll({
     where: whereClause, 
     raw: true
   });

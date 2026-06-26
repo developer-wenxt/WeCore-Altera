@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const PGITRIPOLRISKDTL = sequelize.define('PGITRIPOLRISKDTL', {
+  const PgitRiPolRiskDtl = sequelize.define('PgitRiPolRiskDtl', {
        RPRD_RA_ID: { 
       type: DataTypes.STRING(60), 
       allowNull: true, 
@@ -1554,5 +1554,5 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         underscored: true,
     });
-    return PGITRIPOLRISKDTL;
+    return PgitRiPolRiskDtl;
 };

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const PgitFacOut = sequelize.define('PgitFacOut', {
+  const PGITFACOUT = sequelize.define('PGITFACOUT', {
        FO_SYS_ID: { 
       type: DataTypes.INTEGER, 
       allowNull: false, 
@@ -246,11 +246,32 @@ module.exports = (sequelize, DataTypes) => {
       field: 'FO_FAC_XOL_ID' 
     }
     ,
-   FO_BUS_TYPE: { 
+   FO_DFLT_SHARE_PERC: { 
+      type: DataTypes.DECIMAL(15, 12), 
+      allowNull: true, 
+      
+      field: 'FO_DFLT_SHARE_PERC' 
+    }
+    ,
+   FO_INST_YN: { 
+      type: DataTypes.STRING(1), 
+      allowNull: true, 
+      
+      field: 'FO_INST_YN' 
+    }
+    ,
+   FO_NO_OF_INST: { 
+      type: DataTypes.INTEGER, 
+      allowNull: true, 
+      
+      field: 'FO_NO_OF_INST' 
+    }
+    ,
+   FO_INSTL_METHOD: { 
       type: DataTypes.STRING(12), 
       allowNull: true, 
       
-      field: 'FO_BUS_TYPE' 
+      field: 'FO_INSTL_METHOD' 
     }
     
     }, {
@@ -259,5 +280,5 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         underscored: true,
     });
-    return PgitFacOut;
+    return PGITFACOUT;
 };
