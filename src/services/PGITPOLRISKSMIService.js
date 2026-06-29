@@ -1,5 +1,41 @@
 const { raw } = require('express');
 const { PGITPOLRISKSMI, sequelize } = require('../models');
+const { Amount } = require('./GET_EXCH_RATEService');
+
+// Helper: Calculate LC values for SI and PREM from the save/update payload
+async function calculateSMILCValues(data) {
+  const polSysId = data.PRS_POL_SYS_ID;
+  const endNoIdx = data.PRS_END_NO_IDX;
+  const endSrNo  = data.PRS_END_SR_NO;
+
+  // --- SI conversion ---
+  if (data.PRS_SI_FC != null && data.PRS_SI_CURR_CODE) {
+    const siResult = await Amount(
+      polSysId, endNoIdx, endSrNo,
+      data.PRS_SI_CURR_CODE, Number(data.PRS_SI_FC)
+    );
+    if (siResult && siResult.success) {
+      data.PRS_SI_LC_1 = siResult.data.lc1;
+      data.PRS_SI_LC_2 = siResult.data.lc2;
+      data.PRS_SI_LC_3 = siResult.data.lc3;
+    }
+  }
+
+  // --- PREM conversion ---
+  if (data.PRS_PREM_FC != null && data.PRS_PREM_CURR_CODE) {
+    const premResult = await Amount(
+      polSysId, endNoIdx, endSrNo,
+      data.PRS_PREM_CURR_CODE, Number(data.PRS_PREM_FC)
+    );
+    if (premResult && premResult.success) {
+      data.PRS_PREM_LC_1 = premResult.data.lc1;
+      data.PRS_PREM_LC_2 = premResult.data.lc2;
+      data.PRS_PREM_LC_3 = premResult.data.lc3;
+    }
+  }
+
+  return data;
+}
 
 exports.getAll = async (filters, { limit = 10, offset = 0, order } = {}) => {
   return PGITPOLRISKSMI.findAll({ where: filters, limit, offset, ...(order && { order }) });
@@ -23,6 +59,15 @@ exports.update = async (id, updatedData) => {
     error.statusCode = 404;
     throw error;
   }
+
+  // Merge existing record values so the helper has pol_sys_id, end_no_idx, etc.
+  const merged = { ...item.toJSON(), ...updatedData };
+  await calculateSMILCValues(merged);
+
+  // Copy calculated LC fields back into updatedData
+  ['PRS_SI_LC_1','PRS_SI_LC_2','PRS_SI_LC_3','PRS_PREM_LC_1','PRS_PREM_LC_2','PRS_PREM_LC_3']
+    .forEach(k => { if (merged[k] !== undefined) updatedData[k] = merged[k]; });
+
   await item.update(updatedData);
   return item;
 };
@@ -136,6 +181,9 @@ exports.saveRiskCover = async (data) => {
         ...item,
         PRS_SYS_ID: nextId
       };
+
+      // Calculate LC values for SI and PREM before saving
+      await calculateSMILCValues(payloadToSave);
 
       Object.keys(payloadToSave).forEach(
         key => payloadToSave[key] === undefined && delete payloadToSave[key]
