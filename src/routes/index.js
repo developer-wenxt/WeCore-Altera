@@ -44,6 +44,12 @@ const pgitPolScheduleRouter = require('./pgitPolSchedule');
 const pgitPolInwardRouter = require('./pgitPolInward');
 const pgitPolCoinPartCustRouter = require('./pgitPolCoinPartCust');
 const pgitPolCoinCommRouter = require('./pgitPolCoinComm');
+<<<<<<< HEAD
+=======
+const PGITRIPROPTTYALLOCCUSTRouter = require('./PGITRIPROPTTYALLOCCUST');
+const PGITRIPROPTTYALLOCRCRouter = require('./PGITRIPROPTTYALLOCRC');
+const pgitFacPlaceRiskDtlRouter = require('./pgitFacPlaceRiskDtl');
+>>>>>>> 8e0ba29 (realoc,override changed)
 const router = express.Router();
 const lmCompanyRoutes=require('./lmCompanyRoutes');
 const class_of_busRoute = require('./class_of_busRoute');
@@ -117,6 +123,14 @@ const prCalcFacCommTaxRoute = require('./prCalcFacCommTaxRoute.js');
 const prCalcRetroCustPremTaxRoute = require('./prCalcRetroCustPremTaxRoute.js');
 const vatTaxFieldRoute = require('./vatTaxFieldRoute.js');
 const endBlkSetupRoute = require('./endBlkSetupRoute.js');
+<<<<<<< HEAD
+=======
+const endBtnRoute = require('./endBtnRoute.js');
+const prCancelEndorsementRoute = require('./prCancelEndorsementRoute.js');
+const prRiPropTtyReallocRoute = require('./prRiPropTtyReallocRoute.js');
+const prDelTransDetRoute = require('./prDelTransDetRoute.js');
+const prTtyOvrCalcRoute = require('./prTtyOvrCalcRoute.js');
+>>>>>>> 8e0ba29 (realoc,override changed)
 const polAcntEntryRoute=require('./polAcntEntryRoute.js');
 const inwardField=require('./pgitPolInwardFieldRoute.js');
 const coinPartCustField=require('./pgitPolCoinPartCustFieldRoute.js');
@@ -259,6 +273,30 @@ router.use('/CoinCommField',pgitPolCoinCommField);
 router.use('/PolInwardLov',PolInwardLov);
 router.use('/CoinPartCustLov',CoinPartCustLov);
 router.use('/CoinCommLov',pgitPolCoinCommLov);
+<<<<<<< HEAD
 
 
+=======
+router.use('/ttyPartCustField',riTtyAllocCustField);
+router.use('/ttyRiskClassField',pgitRiPropAllocRcFieldRoute);
+router.use('/PGITRIPROPTTYALLOCCUST', PGITRIPROPTTYALLOCCUSTRouter);
+router.use('/PGITRIPROPTTYALLOCRC', PGITRIPROPTTYALLOCRCRouter);
+router.use('/riConCanBtn', riConCanBtn);
+router.use('/ttyApproveBtn', ttyApproveBtn);
+router.use('/pgitFacPlaceRiskDtl', pgitFacPlaceRiskDtlRouter);
+router.use('/pgitFacPlaceRiskDtlField', pgitFacPlaceRiskDtlFieldRoute);
+router.use('/prDefaultFacPerc', prDefaultFacPercRoute);
+router.use('/prClearFacPerc', prClearFacPercRoute);
+router.use('/endBtn', endBtnRoute);
+router.use('/prCancelEndorsement', prCancelEndorsementRoute);
+router.use('/prRiPropTtyRealloc', prRiPropTtyReallocRoute);
+router.use('/prDelTransDet', prDelTransDetRoute);
+router.use('/prTtyOvrCalc', prTtyOvrCalcRoute);
+
+
+
+
+router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
+
+>>>>>>> 8e0ba29 (realoc,override changed)
 module.exports = router;
