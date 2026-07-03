@@ -47,9 +47,12 @@ const pgitPolCoinCommRouter = require('./pgitPolCoinComm');
 const PGITRIPROPTTYALLOCCUSTRouter = require('./PGITRIPROPTTYALLOCCUST');
 const PGITRIPROPTTYALLOCRCRouter = require('./PGITRIPROPTTYALLOCRC');
 const pgitFacPlaceRiskDtlRouter = require('./pgitFacPlaceRiskDtl');
+<<<<<<< HEAD
 const PGITPOLBROKERRouter = require('./PGITPOLBROKER');
 const PGITPOLCHARGERouter = require('./PGITPOLCHARGE');
 const PGITFACOUTRouter = require('./PGITFACOUT');
+=======
+>>>>>>> 8e0ba29 (realoc,override changed)
 const router = express.Router();
 const lmCompanyRoutes=require('./lmCompanyRoutes');
 const class_of_busRoute = require('./class_of_busRoute');
@@ -126,6 +129,10 @@ const prClearFacPercRoute = require('./prClearFacPercRoute.js');
 const vatTaxFieldRoute = require('./vatTaxFieldRoute.js');
 const endBlkSetupRoute = require('./endBlkSetupRoute.js');
 const endBtnRoute = require('./endBtnRoute.js');
+const prCancelEndorsementRoute = require('./prCancelEndorsementRoute.js');
+const prRiPropTtyReallocRoute = require('./prRiPropTtyReallocRoute.js');
+const prDelTransDetRoute = require('./prDelTransDetRoute.js');
+const prTtyOvrCalcRoute = require('./prTtyOvrCalcRoute.js');
 const polAcntEntryRoute=require('./polAcntEntryRoute.js');
 const inwardField=require('./pgitPolInwardFieldRoute.js');
 const coinPartCustField=require('./pgitPolCoinPartCustFieldRoute.js');
@@ -282,12 +289,20 @@ router.use('/pgitFacPlaceRiskDtlField', pgitFacPlaceRiskDtlFieldRoute);
 router.use('/prDefaultFacPerc', prDefaultFacPercRoute);
 router.use('/prClearFacPerc', prClearFacPercRoute);
 router.use('/endBtn', endBtnRoute);
+router.use('/prCancelEndorsement', prCancelEndorsementRoute);
+router.use('/prRiPropTtyRealloc', prRiPropTtyReallocRoute);
+router.use('/prDelTransDet', prDelTransDetRoute);
+router.use('/prTtyOvrCalc', prTtyOvrCalcRoute);
 
 
 
 
 router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
+<<<<<<< HEAD
 router.use('/PGITPOLBROKER', PGITPOLBROKERRouter);
 router.use('/PGITPOLCHARGE', PGITPOLCHARGERouter);
 router.use('/PGITFACOUT', PGITFACOUTRouter);
+=======
+
+>>>>>>> 8e0ba29 (realoc,override changed)
 module.exports = router;
