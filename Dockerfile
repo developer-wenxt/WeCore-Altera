@@ -26,8 +26,9 @@ COPY --from=build /app /app
 # Replace the Windows instantclient with the Linux version
 RUN rm -rf /app/instantclient_19_22 && \
     wget https://download.oracle.com/otn_software/linux/instantclient/1922000/instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip && \
-    unzip instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip -d /app && \
-    rm instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip
+    (unzip instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip -d /app || true) && \
+    rm instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip && \
+    test -f /app/instantclient_19_22/libclntsh.so.19.1
 
 # Use the built-in node user for security
 RUN chown -R node:node /app
