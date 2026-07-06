@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PGITPOLPREMCOMPSHEETController = require('../controllers/PGITPOLPREMCOMPSHEETController');
+const PGITPOLPREMCOMPSHEETController = require('../controllers/pgitPolPremCompSheetController');
 
 // router.get('/', PGITPOLPREMCOMPSHEETController.getAll);
 // router.post('/', PGITPOLPREMCOMPSHEETController.create);
