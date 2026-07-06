@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ----- Build Stage -----
-FROM node:18-alpine AS build
+FROM node:18-slim AS build
 WORKDIR /app
 
 # Install dependencies
@@ -12,21 +12,33 @@ RUN npm ci
 COPY . .
 
 # ----- Production Stage -----
-FROM node:18-alpine AS runtime
+FROM node:18-slim AS runtime
 WORKDIR /app
 
-# Copy only production dependencies from build stage
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app .
+# Install required Oracle Instant Client dependencies (libaio1) and tools
+RUN apt-get update && \
+    apt-get install -y libaio1 wget unzip && \
+    rm -rf /var/lib/apt/lists/*
 
-# Use a non-root user for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+# Copy application from build stage
+COPY --from=build /app /app
 
-# Expose the application port (adjust if your server uses a different port)
+# Replace the Windows instantclient with the Linux version
+RUN rm -rf /app/instantclient_19_22 && \
+    wget https://download.oracle.com/otn_software/linux/instantclient/1922000/instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip && \
+    unzip instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip -d /app && \
+    rm instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip
+
+# Use the built-in node user for security
+RUN chown -R node:node /app
+USER node
+
+# Expose the application port
 EXPOSE 3000
 
 ENV NODE_ENV=production
+# Set library path for Oracle Client
+ENV LD_LIBRARY_PATH=/app/instantclient_19_22
 
 # Start the application
 CMD ["node", "server.js"]
