@@ -32,17 +32,22 @@ exports.deleteItem = async (id) => {
 
 
 
-exports.getByPolSysId = async (POLH_SYS_ID) => {
+exports.getByPolSysId = async (POLH_SYS_ID, POLH_END_NO_IDX, POLH_END_SR_NO) => {
+  // Build dynamic where clause, omitting null/undefined values
+  const where = {};
+  if (POLH_SYS_ID != null) where.POLH_SYS_ID = POLH_SYS_ID;
+  if (POLH_END_NO_IDX != null) where.POLH_END_NO_IDX = POLH_END_NO_IDX;
+  if (POLH_END_SR_NO != null) where.POLH_END_SR_NO = POLH_END_SR_NO;
   const items = await PgithPolicy.findAll({
-    where: { POLH_SYS_ID },
+    where,
     raw: true
   });
 
   const groupedResult = items.reduce((acc, row) => {
-    const key = row.POLH_END_NO_IDX; 
+    const key = row.POLH_END_NO_IDX;
     (acc[key] ??= []).push(row);
     return acc;
   }, {});
 
-  return groupedResult;
+  return items;
 };

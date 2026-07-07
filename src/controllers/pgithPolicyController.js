@@ -42,7 +42,7 @@ exports.deleteItem = async (req, res, next) => {
 
 exports.getByPolSysId = async (req, res, next) => {
   try {
-    const { polSysId } = req.query;
+    const { polSysId ,polEndNoIdx,polEndSrNo} = req.query;
 
     if (!polSysId) {
       return res.status(400).json({
@@ -51,7 +51,11 @@ exports.getByPolSysId = async (req, res, next) => {
       });
     }
 
-    const result = await pgithPolicyService.getByPolSysId(Number(polSysId));
+    // Convert query params to numbers; undefined if not provided
+    const polSysIdNum = Number(polSysId);
+    const polEndNoIdxNum = polEndNoIdx !== undefined ? Number(polEndNoIdx) : undefined;
+    const polEndSrNoNum = polEndSrNo !== undefined ? Number(polEndSrNo) : undefined;
+    const result = await pgithPolicyService.getByPolSysId(polSysIdNum, polEndNoIdxNum, polEndSrNoNum);
 
     return successResponse(res, 200, 'Fetched', result);
 
