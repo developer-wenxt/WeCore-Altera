@@ -66,6 +66,10 @@ class DropdownService {
       pol_sys_id,
       polSts,
       value,
+      polDivnCode,
+      polCompCode,
+      dsCode,
+      dsType,
     } = queryParams;
 
     if (!PLD_BLOCK_NAME || !PLD_FIELD_NAME) {
@@ -105,6 +109,9 @@ class DropdownService {
       POL_END_CODE:"SELECT PGIM_DOC_SETUP.DS_CODE, DS_DESC FROM PGIM_DOC_SETUP, PGIM_DOC_APPL_PRODUCT WHERE DS_TYPE = '3' AND PGIM_DOC_SETUP.DS_TYPE = PGIM_DOC_APPL_PRODUCT.DAP_DS_TYPE AND PGIM_DOC_SETUP.DS_CODE = PGIM_DOC_APPL_PRODUCT.DAP_DS_CODE AND DAP_PROD_CODE = :prodCode AND (SYSDATE BETWEEN NVL(DS_EFF_FM_DT, SYSDATE) AND NVL(DS_EFF_TO_DT, SYSDATE)) AND NVL('0', '0') = '0' AND ((PGIM_DOC_SETUP.DS_END_TYPE = '029' AND NVL('0', '0') = '1') OR (PGIM_DOC_SETUP.DS_END_TYPE <> '029' AND NVL('0', '0') = '0')) AND ((PGIM_DOC_SETUP.DS_END_TYPE = '030' AND ((NVL(:polSts, 'CO') = 'C' AND PGIM_DOC_SETUP.DS_REIN_ENDT_YN = '1') OR (NVL(:polSts, 'CO') = 'E' AND PGIM_DOC_SETUP.DS_REIN_ENDT_YN = '0'))) OR (PGIM_DOC_SETUP.DS_END_TYPE <> '030' AND NVL(:polSts, 'CO') <> 'C'));" ,
      // PRAI_RISK_CLASS_CODE:"SELECT PC_CODE,PC_DESC  FROM PCOM_CODES WHERE PC_TYPE = 'RISK_CLASS' AND PC_VALUE = '20'  AND  (SELECT TRUNC(POL_FM_DT) FROM PGIT_POLICY  WHERE POL_SYS_ID =:pol_sys_id)  BETWEEN PC_EFF_FM_DT AND PC_EFF_TO_DT",
       POL_ASSR_CODE:"SELECT ASSR_CODE,ASSR_NAME FROM PCOM_ASSURED WHERE ASSR_CUST_CODE =:custCode",
+      POL_DEPT_CODE: "SELECT DEPT_CODE,DEPT_NAME FROM FM_DEPARTMENT WHERE DEPT_DIVN_CODE =:polDivnCode AND DEPT_COMP_CODE =:polCompCode",
+      POL_DIVN_CODE: "SELECT DIVN_CODE, DIVN_NAME FROM FM_DIVISION WHERE DIVN_COMP_CODE =:polCompCode",
+      POL_PROD_CODE: "SELECT A.DAP_PROD_CODE,B.PROD_DESC FROM PGIM_DOC_APPL_PRODUCT A, PGIM_PRODUCT B WHERE A.DAP_PROD_CODE = B.PROD_CODE AND DAP_DS_CODE =:dsCode AND DAP_DS_TYPE =:dsType",
     };
 
     // ----------- SPECIAL QUERIES WITH FILTER ADDED ------------
@@ -133,6 +140,14 @@ class DropdownService {
         bind.pol_sys_id = pol_sys_id || null;
       } else if (PLD_FIELD_NAME === "POL_ASSR_CODE") {
         bind.custCode = custCode || null;
+      } else if (PLD_FIELD_NAME === "POL_DEPT_CODE") {
+        bind.polDivnCode = polDivnCode ? Number(polDivnCode) : null;
+        bind.polCompCode = polCompCode ? Number(polCompCode) : null;
+      } else if (PLD_FIELD_NAME === "POL_DIVN_CODE") {
+        bind.polCompCode = polCompCode ? Number(polCompCode) : null;
+      } else if (PLD_FIELD_NAME === "POL_PROD_CODE") {
+        bind.dsCode = dsCode || null;
+        bind.dsType = dsType || null;
       }
 
                     
@@ -152,10 +167,13 @@ class DropdownService {
       // Fix duplicate binds for special queries
       ({ sql, bind } = expandDuplicateBinds(sql, bind));
 
+
+
       const rows = await sequelize.query(sql, {
         type: QueryTypes.SELECT,
         bind,
       });
+
 
       return {
         blockName: PLD_BLOCK_NAME,
