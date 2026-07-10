@@ -47,12 +47,6 @@ const pgitPolCoinCommRouter = require('./pgitPolCoinComm');
 const PGITRIPROPTTYALLOCCUSTRouter = require('./PGITRIPROPTTYALLOCCUST');
 const PGITRIPROPTTYALLOCRCRouter = require('./PGITRIPROPTTYALLOCRC');
 const pgitFacPlaceRiskDtlRouter = require('./pgitFacPlaceRiskDtl');
-<<<<<<< HEAD
-const PGITPOLBROKERRouter = require('./PGITPOLBROKER');
-const PGITPOLCHARGERouter = require('./PGITPOLCHARGE');
-const PGITFACOUTRouter = require('./PGITFACOUT');
-=======
->>>>>>> 8e0ba29 (realoc,override changed)
 const router = express.Router();
 const lmCompanyRoutes=require('./lmCompanyRoutes');
 const class_of_busRoute = require('./class_of_busRoute');
@@ -298,11 +292,5 @@ router.use('/prTtyOvrCalc', prTtyOvrCalcRoute);
 
 
 router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
-<<<<<<< HEAD
-router.use('/PGITPOLBROKER', PGITPOLBROKERRouter);
-router.use('/PGITPOLCHARGE', PGITPOLCHARGERouter);
-router.use('/PGITFACOUT', PGITFACOUTRouter);
-=======
 
->>>>>>> 8e0ba29 (realoc,override changed)
 module.exports = router;
