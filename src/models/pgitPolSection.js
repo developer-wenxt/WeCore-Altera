@@ -7,13 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       field: 'PSEC_CLASS_CODE' 
     }
     ,
-   PSEC_CN_NO: { 
-      type: DataTypes.STRING(20), 
-      allowNull: true, 
-      
-      field: 'PSEC_CN_NO' 
-    }
-    ,
    PSEC_PROD_CODE: { 
       type: DataTypes.STRING(12), 
       allowNull: true, 
