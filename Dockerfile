@@ -35,7 +35,8 @@ RUN chown -R node:node /app
 USER node
 
 # Expose the application port
-EXPOSE 5001
+EXPOSE 5004
+ENV PORT=5004
 
 ENV NODE_ENV=production
 # Set library path for Oracle Client
