@@ -134,7 +134,7 @@ rl.question('Enter table name: ', async (tableName) => {
     model: path.join(projectRoot, 'models', `${camelCase}.js`),
     service: path.join(projectRoot, 'services', `${camelCase}Service.js`),
     controller: path.join(projectRoot, 'controllers', `${camelCase}Controller.js`),
-    route: path.join(projectRoot, 'routes', `${camelCase}.js`),
+    route: path.join(projectRoot, 'routes', `${camelCase}Route.js`),
   };
 
   fs.writeFileSync(paths.model, modelContent);
