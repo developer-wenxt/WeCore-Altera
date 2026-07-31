@@ -8,7 +8,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const oracledb = require('oracledb');
 
 try {
-  oracledb.initOracleClient({ libDir: path.join(__dirname, '../../instantclient_19_22') });
+  oracledb.initOracleClient({ libDir: path.join(__dirname, '../../instantclient_11_2') });
 } catch (err) {
   console.error('Whoops, failed to initialize Oracle Thick mode:', err);
 }

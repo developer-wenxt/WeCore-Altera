@@ -9,8 +9,8 @@ try {
   const isSEA = process.execPath.endsWith('wecore-altera.exe') || process.execPath.endsWith('wecore-altera');
   
   const libPath = isSEA
-    ? path.join(path.dirname(process.execPath), 'instantclient_19_22') 
-    : path.join(__dirname, '../../instantclient_19_22');
+    ? path.join(path.dirname(process.execPath), 'instantclient_11_2') 
+    : path.join(__dirname, '../../instantclient_11_2');
     
   oracledb.initOracleClient({ libDir: libPath });
 } catch (err) {
