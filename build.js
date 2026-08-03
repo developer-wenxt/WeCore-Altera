@@ -89,11 +89,16 @@ if (fs.existsSync(path.join(ROOT, '.env'))) {
   fs.copyFileSync(path.join(ROOT, '.env'), path.join(DIST, '.env'));
 }
 
-const icSrc = path.join(ROOT, 'instantclient_19_22');
-if (fs.existsSync(icSrc)) {
-  console.log('   Copying Oracle Instant Client...');
-  fs.cpSync(icSrc, path.join(DIST, 'instantclient_19_22'), { recursive: true });
-}
+// Dynamically discover and copy any Oracle Instant Client directories (supporting lower versions like instantclient_11_2)
+fs.readdirSync(ROOT).forEach(item => {
+  if (item.startsWith('instantclient_')) {
+    const icSrc = path.join(ROOT, item);
+    if (fs.statSync(icSrc).isDirectory()) {
+      console.log(`   Copying Oracle Instant Client (${item})...`);
+      fs.cpSync(icSrc, path.join(DIST, item), { recursive: true });
+    }
+  }
+});
 
 // Modify package.json in dist for production
 const pkgPath = path.join(DIST, 'package.json');

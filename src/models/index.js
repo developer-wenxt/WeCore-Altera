@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes, QueryTypes } = require('sequelize');
 
+const fs = require('fs');
 const path = require('path');
 const oracledb = require('oracledb'); // Important for Oracle support
 
@@ -7,12 +8,28 @@ try {
   // Use path.dirname(process.execPath) to find the folder relative to the executable
   // In dev (node server.js), process.execPath is the node binary, so we fallback to __dirname
   const isSEA = process.execPath.endsWith('wecore-altera.exe') || process.execPath.endsWith('wecore-altera');
+  const baseDir = isSEA ? path.dirname(process.execPath) : path.join(__dirname, '../../');
   
-  const libPath = isSEA
-    ? path.join(path.dirname(process.execPath), 'instantclient_11_2') 
-    : path.join(__dirname, '../../instantclient_11_2');
+  let libPath = null;
+  if (fs.existsSync(baseDir)) {
+    const dirs = fs.readdirSync(baseDir).filter(dir => dir.startsWith('instantclient_') && fs.statSync(path.join(baseDir, dir)).isDirectory());
+    if (dirs.length > 0) {
+      // Prioritize instantclient_11_2 (lower client version for broader legacy Oracle DB support), fallback to any available client
+      const preferredClient = dirs.find(d => d === 'instantclient_11_2') || dirs[0];
+      libPath = path.join(baseDir, preferredClient);
+    }
+  }
     
-  oracledb.initOracleClient({ libDir: libPath });
+  if (libPath && fs.existsSync(libPath)) {
+    const tnsAdminPath = path.join(libPath, 'network', 'admin');
+    if (fs.existsSync(tnsAdminPath) && !process.env.TNS_ADMIN) {
+      process.env.TNS_ADMIN = tnsAdminPath;
+    }
+    oracledb.initOracleClient({ libDir: libPath });
+    console.log(`Oracle Thick mode initialized using Instant Client at: ${libPath}`);
+  } else {
+    oracledb.initOracleClient();
+  }
 } catch (err) {
   console.error('Whoops, failed to initialize Oracle Thick mode:', err);
 }

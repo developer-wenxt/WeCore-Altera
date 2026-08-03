@@ -1,18 +1,18 @@
 # syntax=docker/dockerfile:1
 
 # ----- Build Stage -----
-FROM node:18-slim AS build
+FROM node:18-bullseye-slim AS build
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies (production only for clean runtime image)
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --omit=dev
 
 # Copy source code
 COPY . .
 
 # ----- Production Stage -----
-FROM node:18-slim AS runtime
+FROM node:18-bullseye-slim AS runtime
 WORKDIR /app
 
 # Install required Oracle Instant Client dependencies (libaio1) and tools

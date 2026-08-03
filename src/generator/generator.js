@@ -8,7 +8,25 @@ const { Sequelize, DataTypes } = require('sequelize');
 const oracledb = require('oracledb');
 
 try {
-  oracledb.initOracleClient({ libDir: path.join(__dirname, '../../instantclient_11_2') });
+  const baseDir = path.join(__dirname, '../../');
+  let libPath = null;
+  if (fs.existsSync(baseDir)) {
+    const dirs = fs.readdirSync(baseDir).filter(dir => dir.startsWith('instantclient_') && fs.statSync(path.join(baseDir, dir)).isDirectory());
+    if (dirs.length > 0) {
+      const preferredClient = dirs.find(d => d === 'instantclient_11_2') || dirs[0];
+      libPath = path.join(baseDir, preferredClient);
+    }
+  }
+  if (libPath && fs.existsSync(libPath)) {
+    const tnsAdminPath = path.join(libPath, 'network', 'admin');
+    if (fs.existsSync(tnsAdminPath) && !process.env.TNS_ADMIN) {
+      process.env.TNS_ADMIN = tnsAdminPath;
+    }
+    oracledb.initOracleClient({ libDir: libPath });
+    console.log(`Oracle Thick mode initialized in generator using Instant Client at: ${libPath}`);
+  } else {
+    oracledb.initOracleClient();
+  }
 } catch (err) {
   console.error('Whoops, failed to initialize Oracle Thick mode:', err);
 }
