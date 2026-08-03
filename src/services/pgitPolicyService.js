@@ -93,38 +93,61 @@ exports.getAll = async (
 
   const orderSQL = `ORDER BY P.${safeOrder} ${safeDirection}`;
 
-  const sql = `
-    SELECT
-      P.POL_NO,
-      P.POL_BUS_TYPE,
-      P.POL_END_NO,
-      P.POL_CUST_CODE,
-      C.CUST_NAME,
-      P.POL_CUST_CODE || ' - ' || C.CUST_NAME AS CUSTOMER,
-      P.POL_ISSUE_DT,
-      P.POL_FM_DT,
-      P.POL_TO_DT,
-      P.POL_PREM_CURR_CODE,
-      P.POL_DFLT_SI_CURR_CODE,
-      P.POL_SRC_TYPE,
-      P.POL_ASSR_CODE,
-      P.POL_SRC_CODE,
-      P.POL_SYS_ID,
-      P.POL_END_SR_NO,
-      P.POL_END_NO_IDX,
-      P.POL_APPR_STS
-    FROM PGIT_POLICY P
-    LEFT JOIN PCOM_CUSTOMER C ON C.CUST_CODE = P.POL_CUST_CODE
-    ${whereSQL}
-    ${orderSQL}
-    OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY
-  `;
-
   const MAX_LIMIT = 10000;
   const safeLimit = Math.min(Number(limit), MAX_LIMIT);
+  const safeOffset = Number(offset);
 
-  replacements.limit = safeLimit;
-  replacements.offset = Number(offset);
+  replacements.maxRow = safeOffset + safeLimit;
+  replacements.offset = safeOffset;
+
+  const sql = `
+    SELECT
+      POL_NO,
+      POL_BUS_TYPE,
+      POL_END_NO,
+      POL_CUST_CODE,
+      CUST_NAME,
+      CUSTOMER,
+      POL_ISSUE_DT,
+      POL_FM_DT,
+      POL_TO_DT,
+      POL_PREM_CURR_CODE,
+      POL_DFLT_SI_CURR_CODE,
+      POL_SRC_TYPE,
+      POL_ASSR_CODE,
+      POL_SRC_CODE,
+      POL_SYS_ID,
+      POL_END_SR_NO,
+      POL_END_NO_IDX,
+      POL_APPR_STS
+    FROM (
+      SELECT inner_query.*, ROWNUM rnum FROM (
+        SELECT
+          P.POL_NO,
+          P.POL_BUS_TYPE,
+          P.POL_END_NO,
+          P.POL_CUST_CODE,
+          C.CUST_NAME,
+          P.POL_CUST_CODE || ' - ' || C.CUST_NAME AS CUSTOMER,
+          P.POL_ISSUE_DT,
+          P.POL_FM_DT,
+          P.POL_TO_DT,
+          P.POL_PREM_CURR_CODE,
+          P.POL_DFLT_SI_CURR_CODE,
+          P.POL_SRC_TYPE,
+          P.POL_ASSR_CODE,
+          P.POL_SRC_CODE,
+          P.POL_SYS_ID,
+          P.POL_END_SR_NO,
+          P.POL_END_NO_IDX,
+          P.POL_APPR_STS
+        FROM PGIT_POLICY P
+        LEFT JOIN PCOM_CUSTOMER C ON C.CUST_CODE = P.POL_CUST_CODE
+        ${whereSQL}
+        ${orderSQL}
+      ) inner_query WHERE ROWNUM <= :maxRow
+    ) WHERE rnum > :offset
+  `;
 
   const results = await sequelize.query(sql, {
     replacements,
