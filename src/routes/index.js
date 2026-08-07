@@ -129,6 +129,7 @@ const prRiPropTtyReallocRoute = require('./prRiPropTtyReallocRoute.js');
 const prDelTransDetRoute = require('./prDelTransDetRoute.js');
 const prTtyOvrCalcRoute = require('./prTtyOvrCalcRoute.js');
 const prEndtProvFacPercRoute = require('./prEndtProvFacPercRoute.js');
+const prRiPropTtyAllocRoute = require('./prRiPropTtyAllocRoute.js');
 const polAcntEntryRoute=require('./polAcntEntryRoute.js');
 const inwardField=require('./pgitPolInwardFieldRoute.js');
 const coinPartCustField=require('./pgitPolCoinPartCustFieldRoute.js');
@@ -290,9 +291,13 @@ router.use('/prRiPropTtyRealloc', prRiPropTtyReallocRoute);
 router.use('/prDelTransDet', prDelTransDetRoute);
 router.use('/prTtyOvrCalc', prTtyOvrCalcRoute);
 router.use('/prEndtProvFacPerc', prEndtProvFacPercRoute);
+router.use('/prRiPropTtyAlloc', prRiPropTtyAllocRoute);
 
 
 
 
+
+const driverFieldRoute = require('./driverFieldRoute.js');
+router.use('/driverField', driverFieldRoute);
 
 module.exports = router;
