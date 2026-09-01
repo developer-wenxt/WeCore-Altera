@@ -142,6 +142,8 @@ const riConCanBtn = require('./riConCanBtnRoute.js');
 const ttyApproveBtn = require('./ttyApproveBtnRoute.js');
 const pgitFacPlaceRiskDtlFieldRoute = require('./pgitFacPlaceRiskDtlFieldRoute.js');
 const driverFieldRoute = require('./driverFieldRoute.js');
+const prEndtProvFacPercRoute = require('./prEndtProvFacPercRoute.js');
+const prRiPropTtyAllocRoute = require('./prRiPropTtyAllocRoute.js');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
