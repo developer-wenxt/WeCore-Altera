@@ -141,6 +141,7 @@ const pgitRiPropAllocRcFieldRoute = require('./pgitRiPropAllocRcFieldRoute.js');
 const riConCanBtn = require('./riConCanBtnRoute.js');
 const ttyApproveBtn = require('./ttyApproveBtnRoute.js');
 const pgitFacPlaceRiskDtlFieldRoute = require('./pgitFacPlaceRiskDtlFieldRoute.js');
+const driverFieldRoute = require('./driverFieldRoute.js');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -289,11 +290,11 @@ router.use('/prCancelEndorsement', prCancelEndorsementRoute);
 router.use('/prRiPropTtyRealloc', prRiPropTtyReallocRoute);
 router.use('/prDelTransDet', prDelTransDetRoute);
 router.use('/prTtyOvrCalc', prTtyOvrCalcRoute);
-
-
-
-
 router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
 router.use('/PGITPOLBROKER', PGITPOLBROKERRouter);
 router.use('/PGITPOLCHARGE', PGITPOLCHARGERouter);
+router.use('/prEndtProvFacPerc', prEndtProvFacPercRoute);
+router.use('/prRiPropTtyAlloc', prRiPropTtyAllocRoute);
+router.use('/driverField', driverFieldRoute);
+
 module.exports = router;
