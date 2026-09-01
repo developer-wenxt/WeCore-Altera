@@ -1,4 +1,4 @@
-const PGITPOLRISKCOVERService = require('../services/PGITPOLRISKCOVERService');
+const PGITPOLRISKCOVERService = require('../services/pgitPolRiskCoverService');
 const { successResponse } = require('../utils/response');
 
 exports.getAll = async (req, res, next) => {

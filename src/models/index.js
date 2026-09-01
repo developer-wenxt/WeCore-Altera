@@ -5,7 +5,11 @@ const path = require('path');
 const oracledb = require('oracledb'); // Important for Oracle support
 
 try {
-  oracledb.initOracleClient({ libDir: path.join(__dirname, '../../instantclient_19_22') });
+  let libDir = path.join(__dirname, '../../instantclient_19_24');
+  if (!fs.existsSync(libDir)) {
+    libDir = path.join(__dirname, '../../instantclient_19_22');
+  }
+  oracledb.initOracleClient({ libDir });
 } catch (err) {
   console.error('Whoops, failed to initialize Oracle Thick mode:', err);
 }

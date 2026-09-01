@@ -1,4 +1,4 @@
-const PGITPOLPREMCOMPSHEETService = require('../services/PGITPOLPREMCOMPSHEETService');
+const PGITPOLPREMCOMPSHEETService = require('../services/pgitPolPremCompSheetService');
 const { successResponse } = require('../utils/response');
 
 // exports.getAll = async (req, res, next) => {

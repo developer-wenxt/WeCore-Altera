@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PGITPOLRISKCOVERController = require('../controllers/PGITPOLRISKCOVERController');
+const PGITPOLRISKCOVERController = require('../controllers/pgitPolRiskCoverController');
 
 router.get('/', PGITPOLRISKCOVERController.getAll);
 router.put('/:id', PGITPOLRISKCOVERController.update);
