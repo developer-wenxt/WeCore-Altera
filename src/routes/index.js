@@ -140,6 +140,10 @@ const riConCanBtn = require('./riConCanBtnRoute.js');
 const ttyApproveBtn = require('./ttyApproveBtnRoute.js');
 const pgitFacPlaceRiskDtlFieldRoute = require('./pgitFacPlaceRiskDtlFieldRoute.js');
 
+const driverFieldRoute = require('./driverFieldRoute.js');
+const prEndtProvFacPercRoute = require('./prEndtProvFacPercRoute.js');
+const prRiPropTtyAllocRoute = require('./prRiPropTtyAllocRoute.js');
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -292,5 +296,8 @@ router.use('/prTtyOvrCalc', prTtyOvrCalcRoute);
 
 
 router.use('/pgitPolRiskCover', pgitPolRiskCoverRouter);
+router.use('/prEndtProvFacPerc', prEndtProvFacPercRoute);
+router.use('/prRiPropTtyAlloc', prRiPropTtyAllocRoute);
+router.use('/driverField', driverFieldRoute);
 
 module.exports = router;

@@ -1,18 +1,18 @@
 # syntax=docker/dockerfile:1
 
 # ----- Build Stage -----
-FROM node:18-slim AS build
+FROM node:18-bullseye-slim AS build
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies (production only for clean runtime image)
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --omit=dev
 
 # Copy source code
 COPY . .
 
 # ----- Production Stage -----
-FROM node:18-slim AS runtime
+FROM node:18-bullseye-slim AS runtime
 WORKDIR /app
 
 # Install required Oracle Instant Client dependencies (libaio1) and tools
@@ -23,24 +23,29 @@ RUN apt-get update && \
 # Copy application from build stage
 COPY --from=build /app /app
 
-# Replace the Windows instantclient with the Linux version
-RUN rm -rf /app/instantclient_19_22 && \
-    wget https://download.oracle.com/otn_software/linux/instantclient/1922000/instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip && \
-    (unzip instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip -d /app || true) && \
-    rm instantclient-basiclite-linux.x64-19.22.0.0.0dbru.zip && \
-    test -f /app/instantclient_19_22/libclntsh.so.19.1
+# Install Linux Oracle Instant Client 19.24.0.0.0 (supports Oracle DB 11.2, 12c, 18c, 19c, 21c)
+RUN rm -rf /app/instantclient_* && \
+    wget https://download.oracle.com/otn_software/linux/instantclient/1924000/instantclient-basiclite-linux.x64-19.24.0.0.0dbru.zip && \
+    unzip instantclient-basiclite-linux.x64-19.24.0.0.0dbru.zip -d /app && \
+    rm instantclient-basiclite-linux.x64-19.24.0.0.0dbru.zip && \
+    (ln -s /usr/lib/x86_64-linux-gnu/libnsl.so.2 /usr/lib/x86_64-linux-gnu/libnsl.so.1 || true) && \
+    mkdir -p /app/instantclient_19_24/network/admin && \
+    echo "SQLNET.ALLOWED_LOGON_VERSION_CLIENT = 8" > /app/instantclient_19_24/network/admin/sqlnet.ora && \
+    echo "SQLNET.ALLOWED_LOGON_VERSION_SERVER = 8" >> /app/instantclient_19_24/network/admin/sqlnet.ora && \
+    test -f /app/instantclient_19_24/libclntsh.so
 
 # Use the built-in node user for security
 RUN chown -R node:node /app
 USER node
 
 # Expose the application port
-EXPOSE 5004
-ENV PORT=5004
+EXPOSE 5001
+ENV PORT=5001
 
 ENV NODE_ENV=production
-# Set library path for Oracle Client
-ENV LD_LIBRARY_PATH=/app/instantclient_19_22
+# Set library path and TNS admin for Oracle Client
+ENV LD_LIBRARY_PATH=/app/instantclient_19_24
+ENV TNS_ADMIN=/app/instantclient_19_24/network/admin
 
 # Start the application
 CMD ["node", "server.js"]
