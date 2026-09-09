@@ -5,13 +5,9 @@ const envPath = path.join(__dirname, '../../.env');
 require('dotenv').config({ path: envPath });
 const readline = require('readline');
 const { Sequelize, DataTypes } = require('sequelize');
-const oracledb = require('oracledb');
+const initOracle = require('../utils/initOracle');
 
-try {
-  oracledb.initOracleClient({ libDir: path.join(__dirname, '../../instantclient_19_22') });
-} catch (err) {
-  console.error('Whoops, failed to initialize Oracle Thick mode:', err);
-}
+initOracle();
 
 const rl = readline.createInterface({
   input: process.stdin,

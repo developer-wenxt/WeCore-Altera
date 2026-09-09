@@ -2,13 +2,9 @@ const { Sequelize, DataTypes, QueryTypes } = require('sequelize');
 
 const fs = require('fs');
 const path = require('path');
-const oracledb = require('oracledb'); // Important for Oracle support
+const initOracle = require('../utils/initOracle');
 
-try {
-  oracledb.initOracleClient({ libDir: path.join(__dirname, '../../instantclient_19_22') });
-} catch (err) {
-  console.error('Whoops, failed to initialize Oracle Thick mode:', err);
-}
+initOracle();
 
 const sequelize = new Sequelize(
   process.env.DB_NAME, // Service name for Oracle
