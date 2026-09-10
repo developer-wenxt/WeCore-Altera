@@ -25,7 +25,7 @@ WHERE IFD_PB_BLK_NAME='PGIT_POL_RISK_SMI'
   AND IFD_PROG_CODE='PGIT6_03'
   --AND IFD_INST_CODE = 'PGIT6_03-060'
 GROUP BY IFD_PBF_FLD_NAME
-ORDER BY "DISPLAY_ORDER_NO";`;
+ORDER BY "DISPLAY_ORDER_NO"`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

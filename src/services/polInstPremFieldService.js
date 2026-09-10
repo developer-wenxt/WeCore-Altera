@@ -20,7 +20,7 @@ FROM IM_PROG_FIELD_DEFN
 WHERE PFD_PB_BLK_NAME='PGIT_POL_INST_PREM'
   AND PFD_PROG_CODE='PGIT6_02' 
   GROUP BY PFD_FLD_NAME 
-ORDER BY "DISPLAY_ORDER_NO";`;
+ORDER BY "DISPLAY_ORDER_NO"`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

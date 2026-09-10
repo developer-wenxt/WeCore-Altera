@@ -26,7 +26,7 @@ exports.get = async () => {
     AND IFD_PROG_CODE='PGIT6_03'
    --AND IFD_INST_CODE = '20-PD-03_01' 
   GROUP BY IFD_PBF_FLD_NAME  
-  ORDER BY "DISPLAY_ORDER_NO";`;
+  ORDER BY "DISPLAY_ORDER_NO"`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

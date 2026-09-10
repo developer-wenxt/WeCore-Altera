@@ -35,8 +35,7 @@ FROM PGIM_LOV_DEFN
 WHERE PLD_PROG_CODE = 'PGIT6_03'
   AND PLD_BLOCK_NAME = 'PGIT_POL_RISK_ADDL_INFO_01'
   AND PLD_PROD_CODE = :ProdCode
-  AND (PLD_SECTION_CODE = :SectionCode OR PLD_SECTION_CODE IS NULL);
-  `;
+  AND (PLD_SECTION_CODE = :SectionCode OR PLD_SECTION_CODE IS NULL)`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

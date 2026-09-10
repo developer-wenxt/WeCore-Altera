@@ -18,8 +18,7 @@ exports.getOneInst = async (instCode) => {
     FROM IM_INSTANCE_FIELD_DEFN A ,PGIT_POLICY
     WHERE IFD_PROG_CODE = 'PGIT6_01'
       AND (:instCode IS NULL OR IFD_INST_CODE = :instCode)
-    ORDER BY IFD_SEQ_NO;
-  `;
+    ORDER BY IFD_SEQ_NO`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

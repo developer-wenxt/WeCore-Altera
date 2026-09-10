@@ -38,7 +38,7 @@ if (qg && qg.selectQuery) {
       if (sql.endsWith(';')) sql = sql.slice(0, -1);
       const maxRow = limit !== undefined && limit !== null ? Number(offset) + Number(limit) : null;
       const maxRowCond = maxRow !== null ? ` WHERE ROWNUM <= ${maxRow}` : '';
-      sql = `SELECT * FROM (SELECT inner_query.*, ROWNUM rnum FROM (${sql}) inner_query${maxRowCond}) WHERE rnum > ${offset};`;
+      sql = `SELECT * FROM (SELECT inner_query.*, ROWNUM rnum FROM (${sql}) inner_query${maxRowCond}) WHERE rnum > ${offset}`;
     }
     return sql;
   };

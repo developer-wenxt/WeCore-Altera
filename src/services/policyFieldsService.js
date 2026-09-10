@@ -30,7 +30,7 @@ exports.getMotor = async (prodCode, instCode, busType) => {
       AND (:prodCode IS NULL OR POL_PROD_CODE = :prodCode)
       AND (:instCode IS NULL OR IFD_INST_CODE = :instCode)
       AND (:busType IS NULL OR POL_BUS_TYPE = :busType)
-    ORDER BY PROD_DESC, PARA_NAME, IFD_INST_CODE, IFD_SEQ_NO;`;
+    ORDER BY PROD_DESC, PARA_NAME, IFD_INST_CODE, IFD_SEQ_NO`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

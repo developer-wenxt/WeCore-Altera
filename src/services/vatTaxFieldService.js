@@ -22,7 +22,7 @@ FROM IM_PROG_FIELD_DEFN
 WHERE PFD_PB_BLK_NAME='PGIT_TAX_DTL'
   AND PFD_PROG_CODE='PGIT0210' 
   GROUP BY PFD_FLD_NAME 
-ORDER BY "DISPLAY_ORDER_NO";`;
+ORDER BY "DISPLAY_ORDER_NO"`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,

@@ -20,8 +20,7 @@ exports.getOne = async (prodCode, instCode, progCode) => {
     WHERE (:progCode IS NULL OR IFD_PROG_CODE = :progCode)
       AND (:prodCode IS NULL OR POL_PROD_CODE = :prodCode)
       AND (:instCode IS NULL OR IFD_INST_CODE = :instCode)
-    ORDER BY IFD_SEQ_NO;
-  `;
+    ORDER BY IFD_SEQ_NO`;
 
   const records = await sequelize.query(query, {
     type: QueryTypes.SELECT,
