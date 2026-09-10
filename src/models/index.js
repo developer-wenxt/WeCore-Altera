@@ -7,7 +7,7 @@ const initOracle = require('../utils/initOracle');
 initOracle();
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME, // Service name for Oracle
+  process.env.DB_NAME || process.env.DB_SERVICE_NAME || process.env.DB_SCHEMA,
   process.env.DB_USER,
   process.env.DB_PASS,
   {
@@ -21,6 +21,28 @@ const sequelize = new Sequelize(
     },
   }
 );
+
+// Patch Oracle queryGenerator to use ROWNUM pagination for Oracle 11g and lower version compatibility across all model APIs
+const qg = sequelize.dialect.queryGenerator;
+if (qg && qg.selectQuery) {
+  const origSelectQuery = qg.selectQuery.bind(qg);
+  qg.selectQuery = function(tableName, options, model) {
+    const limit = options.limit;
+    const offset = options.offset || 0;
+    const hasPagination = (limit !== undefined && limit !== null) || offset > 0;
+    const optsWithoutLimitOffset = hasPagination
+      ? { ...options, limit: undefined, offset: undefined }
+      : options;
+    let sql = origSelectQuery(tableName, optsWithoutLimitOffset, model);
+    if (hasPagination) {
+      if (sql.endsWith(';')) sql = sql.slice(0, -1);
+      const maxRow = limit !== undefined && limit !== null ? Number(offset) + Number(limit) : null;
+      const maxRowCond = maxRow !== null ? ` WHERE ROWNUM <= ${maxRow}` : '';
+      sql = `SELECT * FROM (SELECT inner_query.*, ROWNUM rnum FROM (${sql}) inner_query${maxRowCond}) WHERE rnum > ${offset};`;
+    }
+    return sql;
+  };
+}
 
 const db = {};
 
